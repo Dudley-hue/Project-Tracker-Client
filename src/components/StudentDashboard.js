@@ -32,3 +32,82 @@ const StudentDashboard = () => {
             fetchProjects(selectedClass.id);
         }
     }, [selectedClass]);
+
+    const fetchCohorts = async () => {
+        try {
+            const response = await cohortService.getAllCohorts();
+            setCohorts(response.data);
+            setFilteredCohorts(response.data);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    const fetchSessionData = async () => {
+        try {
+            const response = await cohortService.getSessionData();
+            if (response.data) {
+                setLoggedIn(true);
+            } else {
+                setLoggedIn(false);
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    const fetchClasses = async (cohortId) => {
+        try {
+            const response = await cohortService.getClassesByCohortId(cohortId);
+            setClasses(response.data);
+            setFilteredClasses(response.data);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    const fetchProjects = async (classId) => {
+        try {
+            const response = await cohortService.getProjectsByClassId(classId);
+            setProjects(response.data);
+            setFilteredProjects(response.data);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    const handleCohortSelect = (cohort) => {
+        setSelectedCohort(cohort);
+    };
+
+    const handleClassSelect = (classObj) => {
+        setSelectedClass(classObj);
+    };
+
+    const handleProjectSelect = (project) => {
+        navigate(`/project/${project.id}`);
+    };
+
+    const handleSearch = (event) => {
+        setSearchValue(event.target.value);
+        if (event.target.value === "") {
+            setFilteredCohorts(cohorts);
+            setFilteredClasses(classes);
+            setFilteredProjects(projects);
+        } else {
+            const filteredCohorts = cohorts.filter((cohort) =>
+                cohort.name.toLowerCase().includes(event.target.value.toLowerCase())
+            );
+            const filteredClasses = classes.filter((classObj) =>
+                classObj.name.toLowerCase().includes(event.target.value.toLowerCase())
+            );
+            const filteredProjects = projects.filter((project) =>
+                project.name.toLowerCase().includes(event.target.value.toLowerCase())
+            );
+            setFilteredCohorts(filteredCohorts);
+            setFilteredClasses(filteredClasses);
+            setFilteredProjects(filteredProjects);
+        }        
+    };
+
+}
