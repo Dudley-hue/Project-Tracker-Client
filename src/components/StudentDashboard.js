@@ -110,4 +110,24 @@ const StudentDashboard = () => {
         }        
     };
 
-}
+    const handleCohortClick = (cohort) => {
+        setSelectedCohort(cohort);
+        setSelectedClass(null);
+        setFilteredClasses(classes.filter((classObj) => classObj.cohortId === cohort.id));
+        setFilteredProjects(projects.filter((project) => project.classId === cohort.classId));
+        setSearchValue("");
+    };
+
+    const handleClassClick = (classObj) => {
+        setSelectedClass(classObj);
+        setFilteredProjects(projects.filter((project) => project.classId === classObj.id));
+        setSearchValue("");
+    };
+
+    const handleProjectClick = (project) => {
+        setSelectedProject(project);
+        navigate(`/project/${project.id}`);
+
+    };
+    
+
