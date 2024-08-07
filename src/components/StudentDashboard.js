@@ -129,5 +129,22 @@ const StudentDashboard = () => {
         navigate(`/project/${project.id}`);
 
     };
+    const handleBack = () => {
+        if (selectedProject){
+            setSelectedProject(null);
+            setSelectedClass(null);
+            setSearchValue("");
+
+        } else if (selectedClass) {
+            setSelectedClass(null);
+            setSearchValue("");
+        } else if (selectedCohort) {
+            setSelectedCohort(null);
+            setSearchValue("");
+        }
+    };
+
+   
+
     
 
