@@ -1,0 +1,16 @@
+.error-boundary {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .error-boundary img {
+    width: 300px;
+    height: auto;
+  }
+  
+  .error-boundary h2 {
+    margin-top: 20px;
+    font-size: 24px;
+    color: #333;
+  }
+  
