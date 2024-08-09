@@ -1,37 +1,33 @@
-import React, { useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import SearchBar from '../components/SearchBar';
 import './Projects.css';
 
-const projectsData = {
-  1: [
-    { id: 1, name: 'Project 1', description: 'Description for Project 1', github_link: '#', poster_url: '' },
-    { id: 2, name: 'Project 2', description: 'Description for Project 2', github_link: '#', poster_url: '' },
-    // Add more projects for Romans as needed
-  ],
-  2: [
-    { id: 3, name: 'Project 1', description: 'Description for Project 1', github_link: '#', poster_url: '' },
-    { id: 4, name: 'Project 2', description: 'Description for Project 2', github_link: '#', poster_url: '' },
-    // Add more projects for Supremes as needed
-  ],
-  3: [
-    { id: 5, name: 'Project 1', description: 'Description for Project 1', github_link: '#', poster_url: '' },
-    { id: 6, name: 'Project 2', description: 'Description for Project 2', github_link: '#', poster_url: '' },
-    // Add more projects for Class 1 as needed
-  ],
-  4: [
-    { id: 7, name: 'Project 1', description: 'Description for Project 1', github_link: '#', poster_url: '' },
-    { id: 8, name: 'Project 2', description: 'Description for Project 2', github_link: '#', poster_url: '' },
-    // Add more projects for Class 2 as needed
-  ],
-};
-
 const Projects = () => {
   const { classId } = useParams();
+  const [projects, setProjects] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const classProjects = projectsData[classId] || [];
 
-  const filteredProjects = classProjects.filter(project =>
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const response = await fetch(`http://127.0.0.1:5000/api/projects?class_id=${classId}`);
+
+        if (response.ok) {
+          const data = await response.json();
+          setProjects(data);
+        } else {
+          console.error('Failed to fetch projects:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error fetching projects:', error);
+      }
+    };
+
+    fetchProjects();
+  }, [classId]);
+
+  const filteredProjects = projects.filter(project =>
     project.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
