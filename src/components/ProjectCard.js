@@ -31,47 +31,30 @@ const Projects = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Mock data to use instead of fetching from backend
-    const mockProjects = [
-      {
-        id: 1,
-        name: "Project A",
-        description: "Description of Project A",
-        poster_url: "https://via.placeholder.com/150",
-        github_link: "https://github.com/user/project-a"
-      },
-      {
-        id: 2,
-        name: "Project B",
-        description: "Description of Project B",
-        poster_url: "https://via.placeholder.com/150",
-        github_link: "https://github.com/user/project-b"
-      },
-      {
-        id: 3,
-        name: "Project C",
-        description: "Description of Project C",
-        poster_url: "https://via.placeholder.com/150",
-        github_link: "https://github.com/user/project-c"
-      },
+    // Retrieve token from local storage or context
+    const token = localStorage.getItem('jwtToken'); // Ensure you have set this token during login
 
-      {
-        id: 4,
-        name: "Project D",
-        description : "Description of Project D",
-        poster_url: "https://via.placeholder.com/150",
-        github_link: "https://github.com/user/project-d"
-        
-      },
-      
-
-    ];
-
-    // Simulate network request with a timeout
-    setTimeout(() => {
-      setProjects(mockProjects);
-      setLoading(false);
-    }, 1000); // Adjust the delay as needed
+    fetch('http://127.0.0.1:5000/api/projects', {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`, // Include JWT token in Authorization header
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        setProjects(data);
+        setLoading(false);
+      })
+      .catch(error => {
+        setError(error.message);
+        setLoading(false);
+      });
   }, []);
 
   if (loading) {
