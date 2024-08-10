@@ -25,3 +25,9 @@ useEffect(() => {
     fetchData();
   }, []);
   
+
+  // Handle clicking on a project from the recent projects list
+const handleProjectClick = (project) => {
+    setSelectedProject(project);
+  };
+  
