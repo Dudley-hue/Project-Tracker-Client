@@ -10,6 +10,7 @@ const StudentDashboard = () => {
     const [classes, setClasses] = useState([]);
     const [selectedClass, setSelectedClass] = useState(null);
     const [projects, setProjects] = useState([]);
+    const [selectedProject, setSelectedProject] = useState(null);
     const [searchValue, setSearchValue] = useState("");
     const [filteredCohorts, setFilteredCohorts] = useState([]);
     const [filteredClasses, setFilteredClasses] = useState([]);
@@ -32,6 +33,13 @@ const StudentDashboard = () => {
             fetchProjects(selectedClass.id);
         }
     }, [selectedClass]);
+
+    useEffect(() => {
+        if (selectedProject) {
+            navigate(`/project/${selectedProject.id}`);
+
+        }
+    }, [selectedProject]);
 
     const fetchCohorts = async () => {
         try {
