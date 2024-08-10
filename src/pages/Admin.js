@@ -1,8 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import './Admin.css';
 
-// Fetch users and projects from the backend
-useEffect(() => {
+function Admin() {
+  const [users, setUsers] = useState([]);
+  const [recentProjects, setRecentProjects] = useState([]);
+  const [selectedProject, setSelectedProject] = useState(null);
+  const [newProject, setNewProject] = useState({
+    name: '',
+    description: '',
+    ownerId: '',
+    githubLink: '',
+    classId: '',
+    posterUrl: ''
+  });
+
+  // Fetch users and projects from the backend
+  useEffect(() => {
     const fetchData = async () => {
       try {
         const usersResponse = await fetch('http://127.0.0.1:5000/api/users');
@@ -21,26 +34,25 @@ useEffect(() => {
         console.error('Error fetching data:', error);
       }
     };
-  
+
     fetchData();
   }, []);
-  
 
   // Handle clicking on a project from the recent projects list
-const handleProjectClick = (project) => {
+  const handleProjectClick = (project) => {
     setSelectedProject(project);
   };
-  
+
   // Handle deleting a project from the recent projects list
-const handleDeleteProject = (e, index) => {
+  const handleDeleteProject = (e, index) => {
     e.stopPropagation(); // Prevent the click event from triggering handleProjectClick
     const updatedProjects = recentProjects.filter((_, i) => i !== index);
     setRecentProjects(updatedProjects);
     setSelectedProject(null); // Clear selected project if it's deleted
   };
-  
+
   // Handle adding a new project
-const handleAddProject = async (e) => {
+  const handleAddProject = async (e) => {
     e.preventDefault();
     try {
       const response = await fetch('http://127.0.0.1:5000/api/projects', {
@@ -56,7 +68,7 @@ const handleAddProject = async (e) => {
           description: '',
           ownerId: '',
           githubLink: '',
-          classId: '',
+          classId: '', // Reset this field
           posterUrl: ''
         });
       } else {
@@ -66,7 +78,6 @@ const handleAddProject = async (e) => {
       console.error('Error adding project:', error);
     }
   };
-  
 
   return (
     <div className="admin-dashboard">
@@ -118,7 +129,7 @@ const handleAddProject = async (e) => {
           <button type="submit" className="submit-btn">Add Project</button>
         </form>
       </div>
-  
+
       <div className="dashboard-content">
         <div className="user-list">
           <h2>User List</h2>
@@ -134,7 +145,7 @@ const handleAddProject = async (e) => {
             )}
           </ul>
         </div>
-  
+
         <div className="recent-projects">
           <h2>Recent Projects</h2>
           <ul>
@@ -156,7 +167,7 @@ const handleAddProject = async (e) => {
           </ul>
         </div>
       </div>
-  
+
       {/* Display selected project details */}
       {selectedProject && (
         <div className="project-details">
@@ -180,4 +191,6 @@ const handleAddProject = async (e) => {
       )}
     </div>
   );
-  
+}
+
+export default Admin;
