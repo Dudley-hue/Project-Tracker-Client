@@ -39,3 +39,31 @@ const handleDeleteProject = (e, index) => {
     setSelectedProject(null); // Clear selected project if it's deleted
   };
   
+  // Handle adding a new project
+const handleAddProject = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch('http://127.0.0.1:5000/api/projects', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newProject)
+      });
+      if (response.ok) {
+        const addedProject = await response.json();
+        setRecentProjects([...recentProjects, addedProject]);
+        setNewProject({
+          name: '',
+          description: '',
+          ownerId: '',
+          githubLink: '',
+          classId: '',
+          posterUrl: ''
+        });
+      } else {
+        console.error('Failed to add project');
+      }
+    } catch (error) {
+      console.error('Error adding project:', error);
+    }
+  };
+  
