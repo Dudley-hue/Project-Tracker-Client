@@ -31,3 +31,11 @@ const handleProjectClick = (project) => {
     setSelectedProject(project);
   };
   
+  // Handle deleting a project from the recent projects list
+const handleDeleteProject = (e, index) => {
+    e.stopPropagation(); // Prevent the click event from triggering handleProjectClick
+    const updatedProjects = recentProjects.filter((_, i) => i !== index);
+    setRecentProjects(updatedProjects);
+    setSelectedProject(null); // Clear selected project if it's deleted
+  };
+  
