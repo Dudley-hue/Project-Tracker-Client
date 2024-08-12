@@ -29,4 +29,11 @@
   .project-card a:hover {
     text-decoration: underline;
   }
+  .project-image {
+    width: 150px;       /* Adjust size as needed */
+    height: auto;       /* Maintain aspect ratio */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Subtle shadow */
+  }
+  
   

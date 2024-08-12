@@ -8,10 +8,10 @@ function Admin() {
   const [newProject, setNewProject] = useState({
     name: '',
     description: '',
-    ownerId: '',
-    githubLink: '',
-    classId: '',
-    posterUrl: ''
+    owner_id: '',  // Match the backend field name
+    github_link: '',  // Match the backend field name
+    class_id: '',  // Match the backend field name
+    poster_url: ''  // Match the backend field name
   });
 
   // Fetch users and projects from the backend
@@ -44,11 +44,22 @@ function Admin() {
   };
 
   // Handle deleting a project from the recent projects list
-  const handleDeleteProject = (e, index) => {
+  const handleDeleteProject = async (e, projectId) => {
     e.stopPropagation(); // Prevent the click event from triggering handleProjectClick
-    const updatedProjects = recentProjects.filter((_, i) => i !== index);
-    setRecentProjects(updatedProjects);
-    setSelectedProject(null); // Clear selected project if it's deleted
+    try {
+      const response = await fetch(`http://127.0.0.1:5000/api/projects/${projectId}`, {
+        method: 'DELETE',
+      });
+      if (response.ok) {
+        const updatedProjects = recentProjects.filter(project => project.id !== projectId);
+        setRecentProjects(updatedProjects);
+        setSelectedProject(null); // Clear selected project if it's deleted
+      } else {
+        console.error('Failed to delete project');
+      }
+    } catch (error) {
+      console.error('Error deleting project:', error);
+    }
   };
 
   // Handle adding a new project
@@ -66,10 +77,10 @@ function Admin() {
         setNewProject({
           name: '',
           description: '',
-          ownerId: '',
-          githubLink: '',
-          classId: '', // Reset this field
-          posterUrl: ''
+          owner_id: '',
+          github_link: '',
+          class_id: '',
+          poster_url: ''
         });
       } else {
         console.error('Failed to add project');
@@ -101,29 +112,29 @@ function Admin() {
           <input
             type="text"
             placeholder="Owner ID"
-            value={newProject.ownerId}
-            onChange={(e) => setNewProject({ ...newProject, ownerId: e.target.value })}
+            value={newProject.owner_id}
+            onChange={(e) => setNewProject({ ...newProject, owner_id: e.target.value })}
             className="form-input"
           />
           <input
             type="text"
             placeholder="GitHub Link"
-            value={newProject.githubLink}
-            onChange={(e) => setNewProject({ ...newProject, githubLink: e.target.value })}
+            value={newProject.github_link}
+            onChange={(e) => setNewProject({ ...newProject, github_link: e.target.value })}
             className="form-input"
           />
           <input
             type="text"
             placeholder="Class ID"
-            value={newProject.classId}
-            onChange={(e) => setNewProject({ ...newProject, classId: e.target.value })}
+            value={newProject.class_id}
+            onChange={(e) => setNewProject({ ...newProject, class_id: e.target.value })}
             className="form-input"
           />
           <input
             type="text"
             placeholder="Poster URL"
-            value={newProject.posterUrl}
-            onChange={(e) => setNewProject({ ...newProject, posterUrl: e.target.value })}
+            value={newProject.poster_url}
+            onChange={(e) => setNewProject({ ...newProject, poster_url: e.target.value })}
             className="form-input"
           />
           <button type="submit" className="submit-btn">Add Project</button>
@@ -135,8 +146,8 @@ function Admin() {
           <h2>User List</h2>
           <ul>
             {users.length > 0 ? (
-              users.map((user, index) => (
-                <li key={index} onClick={() => handleProjectClick(user.project)}>
+              users.map((user) => (
+                <li key={user.id}>
                   {user.username} - {user.email}
                 </li>
               ))
@@ -150,12 +161,12 @@ function Admin() {
           <h2>Recent Projects</h2>
           <ul>
             {recentProjects.length > 0 ? (
-              recentProjects.map((project, index) => (
-                <li key={index} onClick={() => handleProjectClick(project)}>
+              recentProjects.map((project) => (
+                <li key={project.id} onClick={() => handleProjectClick(project)}>
                   {project.name}
                   <button
                     className="delete-btn"
-                    onClick={(e) => handleDeleteProject(e, index)}
+                    onClick={(e) => handleDeleteProject(e, project.id)}
                   >
                     Delete
                   </button>
@@ -172,18 +183,18 @@ function Admin() {
       {selectedProject && (
         <div className="project-details">
           <img
-            src={selectedProject.posterUrl}
+            src={selectedProject.poster_url || 'https://via.placeholder.com/200'}
             alt={selectedProject.name}
             className="project-image"
           />
           <div>
             <h3>{selectedProject.name}</h3>
-            <p><strong>Owner:</strong> {selectedProject.ownerId}</p>
+            <p><strong>Owner:</strong> {selectedProject.owner_id}</p>
             <p><strong>Description:</strong> {selectedProject.description}</p>
             <p>
               <strong>GitHub Link:</strong>{' '}
-              <a href={selectedProject.githubLink} target="_blank" rel="noopener noreferrer">
-                {selectedProject.githubLink}
+              <a href={selectedProject.github_link} target="_blank" rel="noopener noreferrer">
+                {selectedProject.github_link}
               </a>
             </p>
           </div>
