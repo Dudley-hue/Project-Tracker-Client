@@ -80,3 +80,11 @@
     margin-right: 20px;
   }
   
+  .project-image {
+    width: 200px; /* Adjust size as needed */
+    height: auto;
+    border-radius: 8px;
+    margin-right: 20px;
+    display: block;
+  }
+  
