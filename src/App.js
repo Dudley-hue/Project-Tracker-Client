@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import Cohorts from './pages/Cohorts';
 import Classes from './pages/Classes';
 import Projects from './pages/Projects';
+import Admin from './pages/Admin'; // Import the Admin component
 import './App.css';
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
             <Route path="/cohorts" element={<Cohorts />} />
             <Route path="/classes/:cohortId" element={<Classes />} />
             <Route path="/projects/:classId" element={<Projects />} />
+            <Route path="/admin" element={<Admin />} /> {/* Add Admin route */}
           </Routes>
         </div>
       </div>
