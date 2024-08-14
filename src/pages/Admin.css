@@ -1,90 +1,157 @@
 /* General Admin Dashboard Styling */
 .admin-dashboard {
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    background-color: #ac1818; /* Bright background color */
-    color: #333; /* Text color for contrast */
-  }
-  
-  .add-project {
-    margin-bottom: 20px;
-  }
-  
-  .add-project-form {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    background-color: #fff; /* Form background color */
-    padding: 15px;
-    border-radius: 8px; /* Rounded corners */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-  }
-  
-  .form-input {
-    flex: 1;
-    min-width: 150px;
-    margin: 5px 0;
-    padding: 10px;
-    border: 1px solid #ddd; /* Light border color */
-    border-radius: 4px; /* Rounded corners for inputs */
-  }
-  
-  .submit-btn {
-    margin-top: 10px;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 4px;
-    background-color: #4caf50; /* Button background color */
-    color: white;
-    cursor: pointer;
-  }
-  
-  .submit-btn:hover {
-    background-color: #45a049; /* Button hover color */
-  }
-  
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background-color: #ac1818; /* Bright background color retained */
+  color: #333; /* Text color for contrast */
+  font-family: 'Arial', sans-serif; /* Font for a modern look */
+}
+
+.add-project, .add-cohort {
+  margin-bottom: 20px;
+}
+
+.add-project-form, .add-cohort-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+  padding: 20px;
+  border-radius: 12px; /* Rounded corners */
+  backdrop-filter: blur(10px); /* Frosted glass effect */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Enhanced shadow for depth */
+  border: 1px solid rgba(255, 255, 255, 0.3); /* Light border for added effect */
+}
+
+.form-input {
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.3); /* Light border color retained */
+  border-radius: 6px; /* Rounded corners for inputs */
+  font-size: 16px; /* Larger text for better readability */
+  margin-bottom: 10px; /* Add margin to create spacing between inputs */
+  background: rgba(255, 255, 255, 0.2); /* Slightly translucent background */
+  color: #333; /* Text color for contrast */
+}
+
+.form-input::placeholder {
+  color: #ffffff; /* White color for placeholder text */
+}
+
+.submit-btn, .add-class-btn {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px; /* Larger text for better readability */
+  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.submit-btn {
+  background-color: #4caf50; /* Button background color retained */
+  color: #ffffff;
+}
+
+.submit-btn:hover {
+  background-color: #45a049; /* Button hover color retained */
+}
+
+.add-class-btn {
+  background-color: #2196F3; /* Add button background color */
+  color: #ffffff;
+}
+
+.add-class-btn:hover {
+  background-color: #1976D2; /* Button hover color retained */
+}
+
+.delete-btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  background-color: #f44336; /* Red background for delete button */
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 14px; /* Slightly smaller text for delete button */
+  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+  margin-left: 10px; /* Space between project name and delete button */
+}
+
+.delete-btn:hover {
+  background-color: #d32f2f; /* Darker red for hover effect */
+}
+
+.dashboard-content {
+  display: flex;
+  flex-wrap: wrap; /* Allows items to wrap on smaller screens */
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.user-list, .recent-projects, .cohort-list {
+  flex: 1;
+  min-width: 300px; /* Ensure sections don't get too narrow */
+  background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+  padding: 20px;
+  border-radius: 12px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Enhanced shadow for depth */
+  backdrop-filter: blur(10px); /* Frosted glass effect */
+  color: #ffffff; /* White text color */
+}
+
+.user-list ul, .recent-projects ul, .cohort-list ul {
+  list-style-type: none; /* Remove default list styling */
+  padding: 0;
+}
+
+.user-list li, .recent-projects li, .cohort-list li {
+  margin-bottom: 10px; /* Space between list items */
+  display: flex;
+  justify-content: space-between; /* Space out list items */
+  align-items: center;
+  color: #ffffff; /* White text color for list items */
+}
+
+.user-list li, .cohort-list li {
+  background-color: rgba(255, 255, 255, 0.2); /* Light glassy background for list items */
+  padding: 10px;
+  border-radius: 6px; /* Rounded corners for list items */
+}
+
+.recent-projects li {
+  cursor: pointer; /* Pointer cursor for clickable projects */
+  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.recent-projects li:hover {
+  background-color: rgba(255, 255, 255, 0.3); /* Light grey glassy effect on hover */
+}
+
+.project-details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 20px;
+  background-color: #ffffff; /* Background color for project details */
+  padding: 20px;
+  border-radius: 12px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Enhanced shadow for depth */
+}
+
+.project-image {
+  width: 200px; /* Adjust size as needed */
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 15px; /* Space below the image */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for image */
+}
+
+@media (max-width: 768px) {
   .dashboard-content {
-    display: flex;
-    justify-content: space-between;
+    flex-direction: column; /* Stack sections vertically on smaller screens */
   }
-  
-  .user-list {
-    width: 45%;
-    background-color: #fff; /* Background color for user list */
-    padding: 15px;
-    border-radius: 8px; /* Rounded corners */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+
+  .user-list, .recent-projects, .cohort-list {
+    width: 100%; /* Full width for smaller screens */
   }
-  
-  .recent-projects {
-    width: 45%;
-    background-color: #fff; /* Background color for recent projects */
-    padding: 15px;
-    border-radius: 8px; /* Rounded corners */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-  }
-  
-  .project-details {
-    display: flex;
-    align-items: center;
-    margin-top: 20px;
-    background-color: #fff; /* Background color for project details */
-    padding: 15px;
-    border-radius: 8px; /* Rounded corners */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-  }
-  
-  .project-image {
-    max-width: 150px;
-    margin-right: 20px;
-  }
-  
-  .project-image {
-    width: 200px; /* Adjust size as needed */
-    height: auto;
-    border-radius: 8px;
-    margin-right: 20px;
-    display: block;
-  }
-  
+}

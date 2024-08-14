@@ -6,8 +6,8 @@ const Navbar = ({ isAuthenticated, onLogout }) => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    onLogout();
-    navigate('/login');
+    onLogout(); // Call the passed logout function
+    navigate('/login'); // Redirect to login page
   };
 
   return (

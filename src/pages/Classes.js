@@ -1,5 +1,3 @@
-// src/pages/Classes.js
-
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import SearchBar from '../components/SearchBar';
@@ -38,7 +36,11 @@ const Classes = () => {
       <div className="class-list">
         {filteredClasses.map(class_ => (
           <div key={class_.id} className="class-card">
-            <Link to={`/projects/${class_.id}`}>{class_.name}</Link>
+            <Link to={`/projects/${class_.id}`}>
+              <img src={class_.poster_url} alt={`${class_.name} poster`} className="class-poster" />
+              <div className="class-name">{class_.name}</div>
+              <p className="class-description">{class_.description}</p>
+            </Link>
           </div>
         ))}
       </div>

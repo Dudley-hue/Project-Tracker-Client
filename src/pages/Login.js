@@ -22,9 +22,9 @@ function Login() {
       if (response.ok) {
         localStorage.setItem('token', data.token); // Store the token
         if (data.is_admin) {
-          navigate('/admin');
+          navigate('/admin'); // Redirect to the admin page if the user is an admin
         } else {
-          navigate('/');
+          navigate('/'); // Redirect to the home page for regular users
         }
       } else {
         setError(data.error || 'Login failed');

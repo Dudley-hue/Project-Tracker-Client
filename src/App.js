@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
+import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Cohorts from './pages/Cohorts';
 import Classes from './pages/Classes';
@@ -8,7 +9,19 @@ import Projects from './pages/Projects';
 import Admin from './pages/Admin';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import Logout from './pages/Logout';
+import Student from './pages/Student';
 import './App.css';
+
+// ProtectedRoute Component
+const ProtectedRoute = ({ children, isAuthenticated }) => {
+  return isAuthenticated ? children : <Navigate to="/login" />;
+};
+
+// AdminRoute Component
+const AdminRoute = ({ children, isAdmin }) => {
+  return isAdmin ? children : <Navigate to="/" />;
+};
 
 function App() {
   const [isAdmin, setIsAdmin] = useState(false);
@@ -19,7 +32,6 @@ function App() {
     const checkAuthStatus = async () => {
       try {
         const token = localStorage.getItem('token');
-
         const response = await fetch('http://127.0.0.1:5000/api/check_admin', {
           method: 'GET',
           headers: {
@@ -30,16 +42,13 @@ function App() {
         const data = await response.json();
 
         if (response.ok) {
-          console.log('User is authenticated and role checked');
           setIsAuthenticated(true);
           setIsAdmin(data.is_admin);
         } else {
-          console.log('User is not authenticated or admin check failed');
           setIsAuthenticated(false);
           setIsAdmin(false);
         }
       } catch (error) {
-        console.error('Error during authentication check:', error);
         setIsAuthenticated(false);
         setIsAdmin(false);
       } finally {
@@ -50,6 +59,12 @@ function App() {
     checkAuthStatus();
   }, []);
 
+  const handleLogout = () => {
+    localStorage.removeItem('token'); // Remove token from local storage
+    setIsAuthenticated(false); // Update auth state
+    setIsAdmin(false); // Reset admin state
+  };
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -57,17 +72,19 @@ function App() {
   return (
     <Router>
       <div className="app">
-        {isAuthenticated && <Sidebar />}
+        <Navbar isAuthenticated={isAuthenticated} onLogout={handleLogout} />
+        {isAuthenticated && <Sidebar isAdmin={isAdmin} />}
         <div className="main-content">
           <Routes>
-            <Route path="/" element={isAuthenticated ? <Navigate to="/home" /> : <Login />} />
-            <Route path="/home" element={isAuthenticated ? <Home /> : <Navigate to="/login" />} />
-            <Route path="/cohorts" element={<Cohorts />} />
-            <Route path="/classes/:cohortId" element={<Classes />} />
-            <Route path="/projects/:classId" element={<Projects />} />
-            <Route path="/admin" element={isAdmin ? <Admin /> : <Navigate to="/home" />} />
-            <Route path="/login" element={isAuthenticated ? <Navigate to="/home" /> : <Login />} />
-            <Route path="/register" element={isAuthenticated ? <Navigate to="/home" /> : <Register />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/cohorts" element={<ProtectedRoute isAuthenticated={isAuthenticated}><Cohorts /></ProtectedRoute>} />
+            <Route path="/classes/:cohortId" element={<ProtectedRoute isAuthenticated={isAuthenticated}><Classes /></ProtectedRoute>} />
+            <Route path="/projects/:classId" element={<ProtectedRoute isAuthenticated={isAuthenticated}><Projects /></ProtectedRoute>} />
+            <Route path="/admin" element={<AdminRoute isAdmin={isAdmin}><Admin /></AdminRoute>} />
+            <Route path="/student" element={<ProtectedRoute isAuthenticated={isAuthenticated}><Student /></ProtectedRoute>} />
+            <Route path="/login" element={isAuthenticated ? <Navigate to={isAdmin ? "/admin" : "/"} /> : <Login />} />
+            <Route path="/register" element={isAuthenticated ? <Navigate to={isAdmin ? "/admin" : "/"} /> : <Register />} />
+            <Route path="/logout" element={<Logout />} />
           </Routes>
         </div>
       </div>

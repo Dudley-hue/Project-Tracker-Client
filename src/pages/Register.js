@@ -27,7 +27,7 @@ function Register() {
       const data = await response.json();
 
       if (response.ok) {
-        navigate('/login'); // Navigate to login after registration
+        navigate('/login'); // Navigate to login after successful registration
       } else {
         setError(data.error || 'Registration failed');
       }

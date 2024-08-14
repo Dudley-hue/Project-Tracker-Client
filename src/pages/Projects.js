@@ -1,5 +1,3 @@
-// src/pages/Projects.js
-
 import React, { useEffect, useState } from 'react';
 import { authFetch } from '../components/authFetch';
 import './Projects.css'; // Ensure this CSS file is created and used
@@ -30,6 +28,7 @@ function Projects() {
           <div key={project.id} className="project-card">
             {project.poster_url && <img src={project.poster_url} alt={project.name} className="project-image" />}
             <h2>{project.name}</h2>
+            <p className="project-description">{project.description}</p>
             {project.github_link && (
               <a href={project.github_link} target="_blank" rel="noopener noreferrer">
                 View on GitHub

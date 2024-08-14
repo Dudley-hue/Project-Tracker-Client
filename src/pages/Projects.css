@@ -1,39 +1,72 @@
-.projects {
-    padding: 20px;
-  }
-  
-  .project-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-  }
-  
+.project-card {
+  background: rgba(255, 255, 255, 0.2); /* Semi-transparent white background */
+  border-radius: 15px; /* Rounded corners */
+  backdrop-filter: blur(20px); /* Strong blur effect */
+  -webkit-backdrop-filter: blur(20px); /* For Safari */
+  border: 1px solid rgba(255, 255, 255, 0.3); /* Soft border with reduced opacity */
+  padding: 0; /* Remove padding to fit the image tightly */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Slightly reduced shadow for smaller card size */
+  overflow: hidden;
+  width: calc(33.33% - 20px); /* Adjust width for slightly smaller cards */
+  box-sizing: border-box;
+  color: #fff; /* Text color */
+  position: relative; /* Ensure proper layering */
+  margin: 10px; /* Add margin for spacing */
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  align-items: center; /* Center align items horizontally */
+}
+
+.project-card img {
+  width: 100%; /* Full width of the card */
+  height: 200px; /* Fixed height for the image */
+  object-fit: cover; /* Cover the top part of the card without stretching */
+  display: block; /* Ensure image is displayed correctly */
+  border-radius: 15px 15px 0 0; /* Rounded corners only at the top */
+}
+
+.project-card-content {
+  padding: 15px; /* Padding around the content */
+  flex: 1; /* Allow content to grow and push link to the bottom */
+  text-align: center; /* Center align text in the content */
+}
+
+.project-card h3 {
+  font-size: 1.3rem; /* Slightly smaller font size */
+  margin: 10px 0; /* Add margin above and below the title */
+}
+
+.project-card p {
+  font-size: 0.9rem; /* Slightly smaller font size */
+  margin: 15px 0; /* Increased margin above and below the description */
+}
+
+.project-card a {
+  color: #007bff;
+  text-decoration: none;
+  display: block; /* Ensure link is on its own line */
+  text-align: center; /* Center align the link */
+  margin-top: 20px; /* Increased space above the link */
+}
+
+.project-card a:hover {
+  text-decoration: underline;
+}
+
+.project-card p,
+.project-card a {
+  margin: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
   .project-card {
-    background-color: #333;
-    padding: 20px;
-    border-radius: 10px;
-    color: #fff;
-    text-align: center;
+    width: calc(50% - 20px); /* Adjust width for medium screens */
   }
-  
-  .project-card img {
-    max-width: 100%;
-    border-radius: 10px;
+}
+
+@media (max-width: 480px) {
+  .project-card {
+    width: calc(100% - 20px); /* Full width on smaller screens */
   }
-  
-  .project-card a {
-    color: #dd4b39;
-    text-decoration: none;
-  }
-  
-  .project-card a:hover {
-    text-decoration: underline;
-  }
-  .project-image {
-    width: 150px;       /* Adjust size as needed */
-    height: auto;       /* Maintain aspect ratio */
-    border-radius: 8px; /* Rounded corners */
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Subtle shadow */
-  }
-  
-  
+}

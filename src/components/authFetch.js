@@ -3,26 +3,30 @@
 export const authFetch = async (url, options = {}) => {
   const token = localStorage.getItem('token');
   
+  // Define headers
   const headers = {
     'Content-Type': 'application/json',
-    ...(token && { 'Authorization': `Bearer ${token}` }), // Only add Authorization header if token exists
+    ...(token ? { 'Authorization': `Bearer ${token}` } : {}), // Add Authorization header only if token exists
     ...options.headers // Include any additional headers passed
   };
 
   try {
+    // Perform fetch request
     const response = await fetch(url, {
       ...options,
-      headers: headers,
+      headers,
     });
-    
-    const data = await response.json();
 
+    // Check if the response is not OK
     if (!response.ok) {
-      throw new Error(data.error || 'Request failed');
+      const errorData = await response.json();
+      throw new Error(errorData.error || 'Request failed');
     }
 
-    return data;
+    // Parse and return the response data
+    return await response.json();
   } catch (error) {
+    // Log error to the console and rethrow it
     console.error('Fetch error:', error);
     throw error;
   }
