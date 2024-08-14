@@ -1,15 +1,18 @@
 import React from 'react';
-import './SearchBar.css';
+import { Link } from 'react-router-dom';
+import './Sidebar.css';
 
-const SearchBar = ({ searchTerm, setSearchTerm }) => (
-  <div className="search-bar">
-    <input
-      type="text"
-      placeholder="Search..."
-      value={searchTerm}
-      onChange={e => setSearchTerm(e.target.value)}
-    />
+const Sidebar = () => (
+  <div className="sidebar">
+    <h1>ArteDante.</h1>
+    <nav>
+      <ul>
+        <li><Link to="/">Home</Link></li>
+        <li><Link to="/cohorts">Cohorts</Link></li>
+        <li><Link to="/admin">Admin</Link></li>
+      </ul>
+    </nav>
   </div>
 );
 
-export default SearchBar;
+export default Sidebar;

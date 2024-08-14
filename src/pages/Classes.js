@@ -1,25 +1,24 @@
+// src/pages/Classes.js
+
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import SearchBar from '../components/SearchBar';
 import './Classes.css';
+import { authFetch } from '../components/authFetch';
 
 const Classes = () => {
-  const { cohortId } = useParams();
+  const { cohortId } = useParams(); // Get cohort ID from URL
   const [classes, setClasses] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchClasses = async () => {
       try {
-        const response = await fetch(`http://127.0.0.1:5000/api/classes?cohort_id=${cohortId}`);
-
-        if (response.ok) {
-          const data = await response.json();
-          setClasses(data);
-        } else {
-          console.error('Failed to fetch classes:', response.statusText);
-        }
+        const data = await authFetch(`http://127.0.0.1:5000/api/classes?cohort_id=${cohortId}`);
+        setClasses(data);
       } catch (error) {
+        setError('Failed to fetch classes.');
         console.error('Error fetching classes:', error);
       }
     };
@@ -35,6 +34,7 @@ const Classes = () => {
     <div className="classes">
       <h2>Classes in Cohort {cohortId}</h2>
       <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+      {error && <p className="error-message">{error}</p>}
       <div className="class-list">
         {filteredClasses.map(class_ => (
           <div key={class_.id} className="class-card">

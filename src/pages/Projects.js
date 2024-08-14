@@ -1,52 +1,45 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import SearchBar from '../components/SearchBar';
-import './Projects.css';
+// src/pages/Projects.js
 
-const Projects = () => {
-  const { classId } = useParams();
+import React, { useEffect, useState } from 'react';
+import { authFetch } from '../components/authFetch';
+import './Projects.css'; // Ensure this CSS file is created and used
+
+function Projects() {
   const [projects, setProjects] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [error, setError] = useState('');
 
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await fetch(`http://127.0.0.1:5000/api/projects?class_id=${classId}`);
-
-        if (response.ok) {
-          const data = await response.json();
-          setProjects(data);
-        } else {
-          console.error('Failed to fetch projects:', response.statusText);
-        }
+        const data = await authFetch('http://127.0.0.1:5000/api/projects');
+        setProjects(data);
       } catch (error) {
-        console.error('Error fetching projects:', error);
+        setError(error.message);
       }
     };
 
     fetchProjects();
-  }, [classId]);
-
-  const filteredProjects = projects.filter(project =>
-    project.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  }, []);
 
   return (
-    <div className="projects">
-      <h2>Projects in Class {classId}</h2>
-      <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+    <div>
+      <h1>Projects</h1>
+      {error && <p className="error">{error}</p>}
       <div className="project-list">
-        {filteredProjects.map(project => (
+        {projects.map(project => (
           <div key={project.id} className="project-card">
-            <img src={project.poster_url} alt={project.name} />
-            <h3>{project.name}</h3>
-            <p>{project.description}</p>
-            <a href={project.github_link} target="_blank" rel="noopener noreferrer">GitHub Link</a>
+            {project.poster_url && <img src={project.poster_url} alt={project.name} className="project-image" />}
+            <h2>{project.name}</h2>
+            {project.github_link && (
+              <a href={project.github_link} target="_blank" rel="noopener noreferrer">
+                View on GitHub
+              </a>
+            )}
           </div>
         ))}
       </div>
     </div>
   );
-};
+}
 
 export default Projects;

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Admin.css';
+import { authFetch } from '../components/authFetch';
 
 function Admin() {
   const [users, setUsers] = useState([]);
@@ -8,28 +10,46 @@ function Admin() {
   const [newProject, setNewProject] = useState({
     name: '',
     description: '',
-    owner_id: '',  // Match the backend field name
-    github_link: '',  // Match the backend field name
-    class_id: '',  // Match the backend field name
-    poster_url: ''  // Match the backend field name
+    owner_id: '',
+    github_link: '',
+    class_id: '',
+    poster_url: ''
   });
+  const [newCohort, setNewCohort] = useState({
+    name: '',
+    description: '',
+    classes: [{ name: '', description: '' }]
+  });
+  const [cohorts, setCohorts] = useState([]);
+  const navigate = useNavigate();
 
-  // Fetch users and projects from the backend
+  // Check if the user is an admin
+  useEffect(() => {
+    const checkAdmin = async () => {
+      try {
+        const data = await authFetch('http://127.0.0.1:5000/api/check_admin');
+        if (!data.is_admin) {
+          navigate('/login'); // Redirect to login if not admin
+        }
+      } catch (error) {
+        navigate('/login');
+      }
+    };
+
+    checkAdmin();
+  }, [navigate]);
+
+  // Fetch users, projects, and cohorts from the backend
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const usersResponse = await fetch('http://127.0.0.1:5000/api/users');
-        const projectsResponse = await fetch('http://127.0.0.1:5000/api/projects');
-        
-        if (usersResponse.ok && projectsResponse.ok) {
-          const usersData = await usersResponse.json();
-          const projectsData = await projectsResponse.json();
-          
-          setUsers(usersData);
-          setRecentProjects(projectsData);
-        } else {
-          console.error('Failed to fetch data');
-        }
+        const usersData = await authFetch('http://127.0.0.1:5000/api/users');
+        const projectsData = await authFetch('http://127.0.0.1:5000/api/projects');
+        const cohortsData = await authFetch('http://127.0.0.1:5000/api/cohorts');
+
+        setUsers(usersData);
+        setRecentProjects(projectsData);
+        setCohorts(cohortsData);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -47,16 +67,12 @@ function Admin() {
   const handleDeleteProject = async (e, projectId) => {
     e.stopPropagation(); // Prevent the click event from triggering handleProjectClick
     try {
-      const response = await fetch(`http://127.0.0.1:5000/api/projects/${projectId}`, {
+      await authFetch(`http://127.0.0.1:5000/api/projects/${projectId}`, {
         method: 'DELETE',
       });
-      if (response.ok) {
-        const updatedProjects = recentProjects.filter(project => project.id !== projectId);
-        setRecentProjects(updatedProjects);
-        setSelectedProject(null); // Clear selected project if it's deleted
-      } else {
-        console.error('Failed to delete project');
-      }
+      const updatedProjects = recentProjects.filter(project => project.id !== projectId);
+      setRecentProjects(updatedProjects);
+      setSelectedProject(null); // Clear selected project if it's deleted
     } catch (error) {
       console.error('Error deleting project:', error);
     }
@@ -66,28 +82,64 @@ function Admin() {
   const handleAddProject = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://127.0.0.1:5000/api/projects', {
+      const addedProject = await authFetch('http://127.0.0.1:5000/api/projects', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newProject)
       });
-      if (response.ok) {
-        const addedProject = await response.json();
-        setRecentProjects([...recentProjects, addedProject]);
-        setNewProject({
-          name: '',
-          description: '',
-          owner_id: '',
-          github_link: '',
-          class_id: '',
-          poster_url: ''
-        });
-      } else {
-        console.error('Failed to add project');
-      }
+      setRecentProjects([...recentProjects, addedProject]);
+      setNewProject({
+        name: '',
+        description: '',
+        owner_id: '',
+        github_link: '',
+        class_id: '',
+        poster_url: ''
+      });
     } catch (error) {
       console.error('Error adding project:', error);
     }
+  };
+
+  // Handle adding a new cohort
+  const handleAddCohort = async (e) => {
+    e.preventDefault();
+    try {
+      const addedCohort = await authFetch('http://127.0.0.1:5000/api/cohorts_with_classes', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newCohort)
+      });
+      setNewCohort({
+        name: '',
+        description: '',
+        classes: [{ name: '', description: '' }]
+      });
+      setCohorts([...cohorts, addedCohort]); // Update the cohorts list
+    } catch (error) {
+      console.error('Error adding cohort:', error);
+    }
+  };
+
+  // Handle deleting a cohort and all its classes and projects
+  const handleDeleteCohort = async (cohortId) => {
+    try {
+      await authFetch(`http://127.0.0.1:5000/api/cohorts/${cohortId}`, {
+        method: 'DELETE',
+      });
+      const updatedCohorts = cohorts.filter(cohort => cohort.id !== cohortId);
+      setCohorts(updatedCohorts);
+    } catch (error) {
+      console.error('Error deleting cohort:', error);
+    }
+  };
+
+  // Handle adding more classes to the new cohort form
+  const handleAddClassField = () => {
+    setNewCohort({
+      ...newCohort,
+      classes: [...newCohort.classes, { name: '', description: '' }]
+    });
   };
 
   return (
@@ -141,6 +193,56 @@ function Admin() {
         </form>
       </div>
 
+      <div className="add-cohort">
+        <h2>Add New Cohort</h2>
+        <form onSubmit={handleAddCohort} className="add-cohort-form">
+          <input
+            type="text"
+            placeholder="Cohort Name"
+            value={newCohort.name}
+            onChange={(e) => setNewCohort({ ...newCohort, name: e.target.value })}
+            className="form-input"
+          />
+          <input
+            type="text"
+            placeholder="Cohort Description"
+            value={newCohort.description}
+            onChange={(e) => setNewCohort({ ...newCohort, description: e.target.value })}
+            className="form-input"
+          />
+          
+          <h3>Classes</h3>
+          {newCohort.classes.map((cls, idx) => (
+            <div key={idx} className="class-input-group">
+              <input
+                type="text"
+                placeholder="Class Name"
+                value={cls.name}
+                onChange={(e) => {
+                  const newClasses = [...newCohort.classes];
+                  newClasses[idx].name = e.target.value;
+                  setNewCohort({ ...newCohort, classes: newClasses });
+                }}
+                className="form-input"
+              />
+              <input
+                type="text"
+                placeholder="Class Description"
+                value={cls.description}
+                onChange={(e) => {
+                  const newClasses = [...newCohort.classes];
+                  newClasses[idx].description = e.target.value;
+                  setNewCohort({ ...newCohort, classes: newClasses });
+                }}
+                className="form-input"
+              />
+            </div>
+          ))}
+          <button type="button" onClick={handleAddClassField} className="add-class-btn">Add Another Class</button>
+          <button type="submit" className="submit-btn">Add Cohort with Classes</button>
+        </form>
+      </div>
+
       <div className="dashboard-content">
         <div className="user-list">
           <h2>User List</h2>
@@ -177,6 +279,27 @@ function Admin() {
             )}
           </ul>
         </div>
+      </div>
+
+      <div className="cohort-list">
+        <h2>Cohort List</h2>
+        <ul>
+          {cohorts.length > 0 ? (
+            cohorts.map((cohort) => (
+              <li key={cohort.id}>
+                {cohort.name}
+                <button
+                  className="delete-btn"
+                  onClick={() => handleDeleteCohort(cohort.id)}
+                >
+                  Delete Cohort
+                </button>
+              </li>
+            ))
+          ) : (
+            <p>No cohorts available</p>
+          )}
+        </ul>
       </div>
 
       {/* Display selected project details */}
