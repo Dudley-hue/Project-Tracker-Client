@@ -1,7 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Admin.css';
-import { authFetch } from '../components/authFetch';
+
+function authFetch(url, options = {}) {
+  const token = localStorage.getItem('token');
+  if (token) {
+    options.headers = {
+      ...options.headers,
+      'Authorization': `Bearer ${token}`
+    };
+  }
+
+  return fetch(url, options).then(response => {
+    if (!response.ok) {
+      if (response.status === 401) {
+        localStorage.removeItem('token');
+      }
+      throw new Error('Request failed');
+    }
+    return response.json();
+  });
+}
 
 function Admin() {
   const [users, setUsers] = useState([]);
@@ -105,7 +124,7 @@ function Admin() {
   const handleAddCohort = async (e) => {
     e.preventDefault();
     try {
-      const addedCohort = await authFetch('http://127.0.0.1:5000/api/cohorts_with_classes', {
+      const addedCohort = await authFetch('http://127.0.0.1:5000/api/cohorts', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newCohort)
@@ -124,13 +143,13 @@ function Admin() {
   // Handle deleting a cohort and all its classes and projects
   const handleDeleteCohort = async (cohortId) => {
     try {
-      await authFetch(`http://127.0.0.1:5000/api/cohorts/${cohortId}`, {
-        method: 'DELETE',
-      });
-      const updatedCohorts = cohorts.filter(cohort => cohort.id !== cohortId);
-      setCohorts(updatedCohorts);
+        await authFetch(`http://127.0.0.1:5000/api/cohorts/${cohortId}`, {
+            method: 'DELETE',
+        });
+        const updatedCohorts = cohorts.filter(cohort => cohort.id !== cohortId);
+        setCohorts(updatedCohorts);
     } catch (error) {
-      console.error('Error deleting cohort:', error);
+        console.error('Error deleting cohort:', error);
     }
   };
 

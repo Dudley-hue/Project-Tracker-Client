@@ -54,27 +54,20 @@ function App() {
     return <div>Loading...</div>;
   }
 
-  const ProtectedRoute = ({ children }) => {
-    return isAuthenticated ? children : <Navigate to="/login" />;
-  };
-
-  const AdminRoute = ({ children }) => {
-    return isAdmin ? children : <Navigate to="/" />;
-  };
-
   return (
     <Router>
       <div className="app">
-        <Sidebar />
+        {isAuthenticated && <Sidebar />}
         <div className="main-content">
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/cohorts" element={<ProtectedRoute><Cohorts /></ProtectedRoute>} />
-            <Route path="/classes/:cohortId" element={<ProtectedRoute><Classes /></ProtectedRoute>} />
-            <Route path="/projects/:classId" element={<ProtectedRoute><Projects /></ProtectedRoute>} />
-            <Route path="/admin" element={<AdminRoute><Admin /></AdminRoute>} />
-            <Route path="/login" element={isAuthenticated ? <Navigate to={isAdmin ? "/admin" : "/"} /> : <Login />} />
-            <Route path="/register" element={isAuthenticated ? <Navigate to={isAdmin ? "/admin" : "/"} /> : <Register />} />
+            <Route path="/" element={isAuthenticated ? <Navigate to="/home" /> : <Login />} />
+            <Route path="/home" element={isAuthenticated ? <Home /> : <Navigate to="/login" />} />
+            <Route path="/cohorts" element={<Cohorts />} />
+            <Route path="/classes/:cohortId" element={<Classes />} />
+            <Route path="/projects/:classId" element={<Projects />} />
+            <Route path="/admin" element={isAdmin ? <Admin /> : <Navigate to="/home" />} />
+            <Route path="/login" element={isAuthenticated ? <Navigate to="/home" /> : <Login />} />
+            <Route path="/register" element={isAuthenticated ? <Navigate to="/home" /> : <Register />} />
           </Routes>
         </div>
       </div>
