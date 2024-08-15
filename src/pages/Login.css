@@ -1,30 +1,38 @@
 body {
   font-family: 'Arial', sans-serif;
-  background-color: #000; /* Solid background color */
+  margin: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  margin: 0;
+  background-image: url('/public/‘Everybody\ wants\ to\ build\ and\ nobody\ wants\ to\ do\ maintenance’.gif'); /* Add your background image */
+  background-size: cover;
+  background-position: center;
 }
 
 .login-container {
-  background: rgba(255, 255, 255, 0.2); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.login-form {
+  background: rgba(255, 255, 255, 0.2); /* Semi-transparent white background */
+  backdrop-filter: blur(10px); /* Apply blur for frosted glass effect */
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(10px); /* Blur effect for glassmorphism */
-  -webkit-backdrop-filter: blur(10px); /* Safari support */
-  border: 1px solid rgba(255, 255, 255, 0.3); /* Subtle border to enhance the glass effect */
   max-width: 400px;
   width: 100%;
   padding: 20px;
-  margin: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.3); /* Light border to enhance glass effect */
 }
 
-.login-container h2 {
+.login-form h2 {
   text-align: center;
   margin-bottom: 20px;
-  color: #fff; /* White text for contrast */
+  color: #f6f6f6;
 }
 
 .form-group {
@@ -37,7 +45,7 @@ body {
 .form-group label {
   width: 100%;
   margin-bottom: 5px;
-  color: #e9e9e9cb; /* Ensure label text is white */
+  color: #e4e3e3;
   font-weight: 600;
   text-align: left;
 }
@@ -45,17 +53,12 @@ body {
 .form-input {
   width: 100%;
   padding: 12px;
-  background: rgba(255, 255, 255, 0.2); /* Slightly transparent background */
-  border: 1px solid rgba(255, 255, 255, 0.4); /* Semi-transparent border */
+  border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 14px;
-  color: #fff; /* White text for contrast */
   transition: border-color 0.3s ease;
   box-sizing: border-box;
-}
-
-.form-input::placeholder {
-  color: #ddd; /* Light gray color for placeholder text */
+  background: rgba(255, 255, 255, 0.3); /* Light background to match glass effect */
 }
 
 .form-input:focus {
@@ -66,7 +69,7 @@ body {
 .submit-btn {
   width: 100%;
   padding: 12px;
-  background-color: rgba(0, 123, 255, 0.8);
+  background-color: #007bff;
   color: white;
   border: none;
   border-radius: 5px;
@@ -76,7 +79,7 @@ body {
 }
 
 .submit-btn:hover {
-  background-color: rgba(0, 86, 179, 0.8);
+  background-color: #0056b3;
 }
 
 .error {
@@ -88,7 +91,7 @@ body {
 .register-link {
   text-align: center;
   margin-top: 15px;
-  color: #fff; /* White text for contrast */
+  color: rgb(229, 227, 227);
 }
 
 .register-link a {
