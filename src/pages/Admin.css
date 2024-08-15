@@ -8,6 +8,7 @@
   font-family: 'Arial', sans-serif; /* Font for a modern look */
 }
 
+/* Glassy form styling */
 .add-project, .add-cohort {
   margin-bottom: 20px;
 }
@@ -31,11 +32,12 @@
   font-size: 16px; /* Larger text for better readability */
   margin-bottom: 10px; /* Add margin to create spacing between inputs */
   background: rgba(255, 255, 255, 0.2); /* Slightly translucent background */
-  color: #333; /* Text color for contrast */
+  color: #000; /* Text color for input fields set to black */
 }
 
 .form-input::placeholder {
-  color: #ffffff; /* White color for placeholder text */
+  color: #000; /* Black color for placeholder text */
+  font-weight: bold; /* Bold placeholder text */
 }
 
 .submit-btn, .add-class-btn {

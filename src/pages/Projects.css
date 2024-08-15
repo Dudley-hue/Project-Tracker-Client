@@ -1,72 +1,92 @@
-.project-card {
-  background: rgba(255, 255, 255, 0.2); /* Semi-transparent white background */
-  border-radius: 15px; /* Rounded corners */
-  backdrop-filter: blur(20px); /* Strong blur effect */
-  -webkit-backdrop-filter: blur(20px); /* For Safari */
-  border: 1px solid rgba(255, 255, 255, 0.3); /* Soft border with reduced opacity */
-  padding: 0; /* Remove padding to fit the image tightly */
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Slightly reduced shadow for smaller card size */
-  overflow: hidden;
-  width: calc(33.33% - 20px); /* Adjust width for slightly smaller cards */
-  box-sizing: border-box;
-  color: #fff; /* Text color */
-  position: relative; /* Ensure proper layering */
-  margin: 10px; /* Add margin for spacing */
+/* Main container for the projects page */
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background: url('https://i.pinimg.com/originals/2d/6f/8e/2d6f8e8f2f7e0a6a7e0f6f7a6f7e0a6a7e0f6f7e0a6a7e0f6f7e0a6a7e0f6f7') no-repeat center center fixed;
+  background-attachment: fixed;
+  background-size: cover;
+  color: #ffffff;
+}
+
+/* Projects page container */
+.project-list {
   display: flex;
-  flex-direction: column; /* Stack items vertically */
-  align-items: center; /* Center align items horizontally */
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 20px;
+  gap: 20px;
 }
 
-.project-card img {
-  width: 100%; /* Full width of the card */
-  height: 200px; /* Fixed height for the image */
-  object-fit: cover; /* Cover the top part of the card without stretching */
-  display: block; /* Ensure image is displayed correctly */
-  border-radius: 15px 15px 0 0; /* Rounded corners only at the top */
+/* Card styling for each project */
+.project-card {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  backdrop-filter: blur(10px) saturate(180%);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 300px;
+  text-align: center;
+  padding: 20px;
+  color: #ffffff;
 }
 
-.project-card-content {
-  padding: 15px; /* Padding around the content */
-  flex: 1; /* Allow content to grow and push link to the bottom */
-  text-align: center; /* Center align text in the content */
+/* Hover effect for project cards */
+.project-card:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
 }
 
-.project-card h3 {
-  font-size: 1.3rem; /* Slightly smaller font size */
-  margin: 10px 0; /* Add margin above and below the title */
+/* Project image styling */
+.project-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  transition: transform 0.3s ease;
 }
 
-.project-card p {
-  font-size: 0.9rem; /* Slightly smaller font size */
-  margin: 15px 0; /* Increased margin above and below the description */
+.project-card:hover .project-image {
+  transform: scale(1.1);
 }
 
+/* Project title styling */
+.project-card h2 {
+  font-size: 1.5em;
+  margin: 10px 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Project description styling */
+.project-description {
+  font-size: 1em;
+  line-height: 1.6em;
+  margin: 10px 0;
+  color: #dddddd;
+}
+
+/* GitHub link button */
 .project-card a {
-  color: #007bff;
+  display: inline-block;
+  margin-top: 15px;
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: white;
+  border-radius: 4px;
   text-decoration: none;
-  display: block; /* Ensure link is on its own line */
-  text-align: center; /* Center align the link */
-  margin-top: 20px; /* Increased space above the link */
+  transition: background-color 0.3s ease;
 }
 
 .project-card a:hover {
-  text-decoration: underline;
+  background-color: #218838;
 }
 
-.project-card p,
-.project-card a {
-  margin: 0;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .project-card {
-    width: calc(50% - 20px); /* Adjust width for medium screens */
-  }
-}
-
-@media (max-width: 480px) {
-  .project-card {
-    width: calc(100% - 20px); /* Full width on smaller screens */
-  }
+/* Error message styling */
+.error {
+  color: red;
+  text-align: center;
+  margin-top: 20px;
+  font-size: 1.2em;
 }

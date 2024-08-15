@@ -2,6 +2,10 @@ html, body, #root {
   height: 100%;
   margin: 0;
   background-color: #111;
+  background-image: url('./images/abstract-flow-background.jpg');
+  background-size: cover; /* Ensures the image covers the entire background */
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .app {
@@ -12,6 +16,6 @@ html, body, #root {
 .main-content {
   flex-grow: 1;
   padding: 20px;
-  background-color: #111;
+  background-color: rgba(17, 17, 17, 0.9); /* Semi-transparent black to ensure text visibility */
   color: #fff;
 }

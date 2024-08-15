@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-d
 import Sidebar from './components/Sidebar';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
+import Contact from './pages/Contact';
+import About from './pages/About';
 import Cohorts from './pages/Cohorts';
 import Classes from './pages/Classes';
 import Projects from './pages/Projects';
@@ -85,6 +87,8 @@ function App() {
             <Route path="/login" element={isAuthenticated ? <Navigate to={isAdmin ? "/admin" : "/"} /> : <Login />} />
             <Route path="/register" element={isAuthenticated ? <Navigate to={isAdmin ? "/admin" : "/"} /> : <Register />} />
             <Route path="/logout" element={<Logout />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/about" element={<About />} />
           </Routes>
         </div>
       </div>

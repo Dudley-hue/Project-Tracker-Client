@@ -1,50 +1,76 @@
+/* Background image for the register page */
+body {
+  background-image: url('../images/abstract-flow-background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* Glassy container for the register form */
 .register-container {
-    max-width: 400px;
-    margin: 50px auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-  }
-  
-  .register-container h2 {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .form-input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .form-select {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .submit-btn {
-    width: 100%;
-    padding: 10px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .submit-btn:hover {
-    background-color: #218838;
-  }
-  
-  .error {
-    color: red;
-    text-align: center;
-    margin-top: 10px;
-  }
-  
+  max-width: 500px; /* Increased max width for a larger form */
+  margin: 70px auto; /* Adjusted margin for better positioning */
+  padding: 30px; /* Increased padding for more space inside the form */
+  background: rgba(255, 255, 255, 0.2); /* Semi-transparent white background */
+  border-radius: 20px; /* More rounded corners */
+  backdrop-filter: blur(10px); /* Background blur effect */
+  -webkit-backdrop-filter: blur(10px); /* Safari support */
+  border: 1px solid rgba(255, 255, 255, 0.3); /* Soft border with reduced opacity */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+  color: #fff; /* White text color */
+  text-align: center; /* Center align text */
+}
+
+/* Title styling */
+.register-container h2 {
+  margin-bottom: 30px; /* Increased space below the title */
+  font-size: 2rem; /* Larger font size */
+  color: #fff; /* White title color */
+}
+
+/* Input field styling */
+.form-input,
+.form-select {
+  width: 100%;
+  padding: 15px; /* Increased padding for a taller input */
+  margin-bottom: 20px; /* Increased space below each input */
+  border: 1px solid rgba(255, 255, 255, 0.3); /* Soft border */
+  border-radius: 10px; /* Rounded corners */
+  background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent input background */
+  color: #fff; /* White text color */
+  font-size: 1.2rem; /* Slightly larger font size */
+  box-sizing: border-box; /* Box-sizing for consistent padding */
+}
+
+/* Glassy placeholder effect */
+.form-input::placeholder,
+.form-select::placeholder {
+  color: rgba(255, 255, 255, 0.6); /* Semi-transparent white placeholder */
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.3); /* Light shadow for a frosted effect */
+}
+
+/* Button styling */
+.submit-btn {
+  width: 100%;
+  padding: 12px; /* Increased padding for a taller button */
+  background-color: rgba(40, 167, 69, 0.8); /* Semi-transparent button background */
+  color: #fff; /* White text color */
+  border: none;
+  border-radius: 10px; /* Rounded corners */
+  cursor: pointer;
+  font-size: 1.2rem; /* Slightly larger font size */
+  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.submit-btn:hover {
+  background-color: rgba(40, 167, 69, 1); /* Fully opaque background on hover */
+}
+
+/* Error message styling */
+.error {
+  color: #ff4f4f; /* Red color for errors */
+  margin-top: 15px; /* Increased margin above error message */
+}
