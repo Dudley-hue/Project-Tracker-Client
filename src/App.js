@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate, useLocation } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
@@ -23,6 +23,37 @@ const ProtectedRoute = ({ children, isAuthenticated }) => {
 // AdminRoute Component
 const AdminRoute = ({ children, isAdmin }) => {
   return isAdmin ? children : <Navigate to="/" />;
+};
+
+// MainContent Component to wrap the useLocation hook
+const MainContent = ({ isAuthenticated, isAdmin, handleLogout }) => {
+  const location = useLocation();
+
+  // Determine if we should hide the Navbar and Sidebar
+  const authPages = ['/login', '/register', '/logout'];
+  const isAuthPage = authPages.includes(location.pathname);
+
+  return (
+    <>
+      {!isAuthPage && <Navbar isAuthenticated={isAuthenticated} onLogout={handleLogout} />}
+      {!isAuthPage && isAuthenticated && <Sidebar isAdmin={isAdmin} />}
+      <div className="main-content">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/cohorts" element={<ProtectedRoute isAuthenticated={isAuthenticated}><Cohorts /></ProtectedRoute>} />
+          <Route path="/classes/:cohortId" element={<ProtectedRoute isAuthenticated={isAuthenticated}><Classes /></ProtectedRoute>} />
+          <Route path="/projects/:classId" element={<ProtectedRoute isAuthenticated={isAuthenticated}><Projects /></ProtectedRoute>} />
+          <Route path="/admin" element={<AdminRoute isAdmin={isAdmin}><Admin /></AdminRoute>} />
+          <Route path="/student" element={<ProtectedRoute isAuthenticated={isAuthenticated}><Student /></ProtectedRoute>} />
+          <Route path="/login" element={isAuthenticated ? <Navigate to={isAdmin ? "/admin" : "/"} /> : <Login />} />
+          <Route path="/register" element={isAuthenticated ? <Navigate to={isAdmin ? "/admin" : "/"} /> : <Register />} />
+          <Route path="/logout" element={<Logout />} />
+        </Routes>
+      </div>
+    </>
+  );
 };
 
 function App() {
@@ -74,27 +105,10 @@ function App() {
   return (
     <Router>
       <div className="app">
-        <Navbar isAuthenticated={isAuthenticated} onLogout={handleLogout} />
-        {isAuthenticated && <Sidebar isAdmin={isAdmin} />}
-        <div className="main-content">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/cohorts" element={<ProtectedRoute isAuthenticated={isAuthenticated}><Cohorts /></ProtectedRoute>} />
-            <Route path="/classes/:cohortId" element={<ProtectedRoute isAuthenticated={isAuthenticated}><Classes /></ProtectedRoute>} />
-            <Route path="/projects/:classId" element={<ProtectedRoute isAuthenticated={isAuthenticated}><Projects /></ProtectedRoute>} />
-            <Route path="/admin" element={<AdminRoute isAdmin={isAdmin}><Admin /></AdminRoute>} />
-            <Route path="/student" element={<ProtectedRoute isAuthenticated={isAuthenticated}><Student /></ProtectedRoute>} />
-            <Route path="/login" element={isAuthenticated ? <Navigate to={isAdmin ? "/admin" : "/"} /> : <Login />} />
-            <Route path="/register" element={isAuthenticated ? <Navigate to={isAdmin ? "/admin" : "/"} /> : <Register />} />
-            <Route path="/logout" element={<Logout />} />
-          </Routes>
-        </div>
+        <MainContent isAuthenticated={isAuthenticated} isAdmin={isAdmin} handleLogout={handleLogout} />
       </div>
     </Router>
   );
-
 }
 
 export default App;
