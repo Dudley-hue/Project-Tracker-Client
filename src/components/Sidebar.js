@@ -2,15 +2,15 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './Sidebar.css';
 
-const Sidebar = ({ isAdmin }) => (
+const Sidebar = () => (
   <div className="sidebar">
-    <h1>ArteDante.</h1>
     <nav>
       <ul>
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/cohorts">Cohorts</Link></li>
-        {isAdmin && <li><Link to="/admin">Admin</Link></li>}
-        <li><Link to="/student">Student</Link></li>
+        <li><Link to="/"><i class="fa-solid fa-suitcase fa-flip"></i>Dashboard</Link></li>
+        <li><Link to="/"><i class="fa-solid fa-briefcase fa-flip"></i>Projects</Link></li>
+        <li><Link to="/"><i class="fa-solid fa-users fa-flip"></i>Users</Link></li>
+        <li><Link to="/"><i class="fa-solid fa-anchor fa-flip"></i>Cohorts</Link></li>
+        <li><Link to="/admin"><i class="fa-solid fa-user-secret fa-flip"></i>Admin</Link></li>
       </ul>
     </nav>
   </div>

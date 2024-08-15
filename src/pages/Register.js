@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import './Register.css';
 
 function Register() {
   const [username, setUsername] = useState('');
@@ -27,7 +28,7 @@ function Register() {
       const data = await response.json();
 
       if (response.ok) {
-        navigate('/login'); // Navigate to login after successful registration
+        navigate('/login'); // Navigate to login after registration
       } else {
         setError(data.error || 'Registration failed');
       }
@@ -38,41 +39,61 @@ function Register() {
 
   return (
     <div className="register-container">
-      <h2>Register</h2>
-      <form onSubmit={handleRegister}>
-        <input
-          type="text"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          className="form-input"
-        />
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="form-input"
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="form-input"
-        />
-        <select
-          value={role}
-          onChange={(e) => setRole(e.target.value)}
-          className="form-select"
-        >
-          <option value="student">Student</option>
-          <option value="admin">Admin</option>
-        </select>
-        <button type="submit" className="submit-btn">Register</button>
-      </form>
-      {error && <p className="error">{error}</p>}
-      <p>Already have an account? <Link to="/login">Login here</Link>.</p>
+      <div className="register-form">
+        <h2>Create Your Account</h2>
+        <form onSubmit={handleRegister}>
+          <div className="form-group">
+            <label htmlFor="username">Username</label>
+            <input
+              id="username"
+              type="text"
+              placeholder="Enter your username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              className="form-input"
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="email">Email</label>
+            <input
+              id="email"
+              type="email"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="form-input"
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="password">Password</label>
+            <input
+              id="password"
+              type="password"
+              placeholder="Create a password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="form-input"
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="role">Role</label>
+            <select
+              id="role"
+              value={role}
+              onChange={(e) => setRole(e.target.value)}
+              className="form-select"
+            >
+              <option value="student">Student</option>
+              <option value="admin">Admin</option>
+            </select>
+          </div>
+          <button type="submit" className="submit-btn">Register</button>
+        </form>
+        {error && <p className="error">{error}</p>}
+        <p className="login-link">
+          Already have an account? <Link to="/login">Login here</Link>.
+        </p>
+      </div>
     </div>
   );
 }
