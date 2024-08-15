@@ -1,17 +1,25 @@
 body {
   font-family: 'Arial', sans-serif;
   background-color: #f4f4f9;
+  margin: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  margin: 0;
   background-image: url('/public/‘Everybody\ wants\ to\ build\ and\ nobody\ wants\ to\ do\ maintenance’.gif'); /* Add your background image */
   background-size: cover;
   background-position: center;
 }
 
 .register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%; 
+  height: 100%;
+}
+
+.register-form {
   background: rgba(255, 255, 255, 0.2); /* Semi-transparent white background */
   backdrop-filter: blur(10px); /* Apply blur for frosted glass effect */
   border-radius: 10px;
@@ -19,7 +27,6 @@ body {
   max-width: 400px;
   width: 100%; 
   padding: 20px;
-  margin: 20px;
   border: 1px solid rgba(255, 255, 255, 0.3); /* Light border to enhance glass effect */
 }
 

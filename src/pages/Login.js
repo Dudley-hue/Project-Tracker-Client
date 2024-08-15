@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import './Login.css';
@@ -12,12 +11,6 @@ function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     setError('');
-
-    if (!email || !password) {
-      setError('Please fill in all fields.');
-      return;
-    }
-
     try {
       const response = await fetch('http://127.0.0.1:5000/api/login', {
         method: 'POST',
@@ -34,10 +27,8 @@ function Login() {
         } else {
           navigate('/');
         }
-      } else if (response.status === 401) {
-        setError('Invalid email or password.');
       } else {
-        setError(data.error || 'Login failed.');
+        setError(data.error || 'Login failed');
       }
     } catch (error) {
       setError('An error occurred. Please try again.');
@@ -58,7 +49,6 @@ function Login() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="form-input"
-              required
             />
           </div>
           <div className="form-group">
@@ -70,7 +60,6 @@ function Login() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="form-input"
-              required
             />
           </div>
           <button type="submit" className="submit-btn">Login</button>
