@@ -12,6 +12,8 @@ import Register from './pages/Register';
 import Logout from './pages/Logout';
 import Student from './pages/Student';
 import './App.css';
+import About from './About';
+import Contact from './pages/Contact';
 
 // ProtectedRoute Component
 const ProtectedRoute = ({ children, isAuthenticated }) => {
@@ -77,6 +79,8 @@ function App() {
         <div className="main-content">
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/about" element={<About />} />
             <Route path="/cohorts" element={<ProtectedRoute isAuthenticated={isAuthenticated}><Cohorts /></ProtectedRoute>} />
             <Route path="/classes/:cohortId" element={<ProtectedRoute isAuthenticated={isAuthenticated}><Classes /></ProtectedRoute>} />
             <Route path="/projects/:classId" element={<ProtectedRoute isAuthenticated={isAuthenticated}><Projects /></ProtectedRoute>} />

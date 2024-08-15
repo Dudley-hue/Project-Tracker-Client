@@ -5,21 +5,25 @@ import './Home.css';
 const Home = () => (
   <div className="home">
     <Navbar />
-    <div className="content">
-      <div className="contact-info">
-        <h2>Contact</h2>
-        <p>Phone number: +380 73 103 07 25</p>
-        <p>Email: info@artedante.com</p>
+    <div className="cards-container">
+      <div className="card">
+        <h3>Welcome to Our Platform</h3>
+        <p>
+          Discover the most advanced project management tools designed to help you keep track of your cohorts, classes, and projects with ease.
+        </p>
       </div>
-      <div className="contact-form">
-        <h2>Leave your contact info – hear from us the same day!</h2>
-        <form>
-          <label htmlFor="name">Name:</label>
-          <input type="text" id="name" name="name" />
-          <label htmlFor="phone">Phone number:</label>
-          <input type="text" id="phone" name="phone" />
-          <button type="submit">Send</button>
-        </form>
+      
+      <div className="card">
+        <h3>Comprehensive Reporting</h3>
+        <p>
+          Generate detailed reports on project outcomes, class performance, and cohort progress, helping you make informed decisions.
+        </p>
+      </div>
+      <div className="card">
+        <h3>Intuitive User Interface</h3>
+        <p>
+          Our platform is built with simplicity and efficiency in mind, ensuring that you can focus on what matters most—your projects.
+        </p>
       </div>
     </div>
   </div>

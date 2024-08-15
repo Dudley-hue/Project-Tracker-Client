@@ -1,54 +1,42 @@
 .home {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-  }
-  
-  .content {
-    padding: 20px;
-    flex-grow: 1;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    background: linear-gradient(to bottom right, #dd4b39, #333);
-  }
-  
-  .contact-info,
-  .contact-form {
-    background-color: rgba(0, 0, 0, 0.7);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  }
-  
-  .contact-info h2,
-  .contact-form h2 {
-    margin-top: 0;
-  }
-  
-  .contact-form label {
-    display: block;
-    margin: 10px 0 5px;
-  }
-  
-  .contact-form input {
-    width: calc(100% - 22px);
-    padding: 10px;
-    margin-bottom: 10px;
-    border: none;
-    border-radius: 5px;
-  }
-  
-  .contact-form button {
-    padding: 10px 20px;
-    background-color: #dd4b39;
-    border: none;
-    border-radius: 5px;
-    color: #fff;
-    cursor: pointer;
-  }
-  
-  .contact-form button:hover {
-    background-color: #ff6659;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: url('../components/‘Everybody\ wants\ to\ build\ and\ nobody\ wants\ to\ do\ maintenance’.gif') no-repeat center center/cover;
+  padding: 20px;
+}
+
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  width: 100%;
+  max-width: 1200px;
+  margin-top: 50px;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  color: #fff;
+}
+
+.card h3 {
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+}
+
+.card p {
+  font-size: 1rem;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 24px 0 rgba(31, 38, 135, 0.5);
+}

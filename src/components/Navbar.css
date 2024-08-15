@@ -1,15 +1,15 @@
-/* Navbar.css */
-
 .navbar {
-  background-color: #333;
-  padding: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px); /* Glassmorphism effect */
+  background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+  padding: 20px; /* Larger padding for a bigger navbar */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   width: 100%;
   z-index: 1000; /* Ensure the navbar is above other content */
+  transition: background-color 0.3s ease; /* Smooth background transition */
 }
 
 .navbar ul {
@@ -21,16 +21,19 @@
 }
 
 .navbar ul li {
-  margin: 0 15px; /* Adjusted margin for spacing between items */
+  margin: 0 20px; /* Adjusted margin for spacing between items */
 }
 
 .navbar ul li a {
   color: #fff;
   text-decoration: none;
+  font-size: 18px; /* Larger font size for more prominence */
+  transition: color 0.3s ease, text-shadow 0.3s ease; /* Smooth color transition */
 }
 
 .navbar ul li a:hover {
-  text-decoration: underline;
+  color: #FFD700; /* Gold hover effect */
+  text-shadow: 0px 0px 8px rgba(255, 215, 0, 0.8); /* Glow effect on hover */
 }
 
 .navbar ul li button {
@@ -38,5 +41,11 @@
   border: none;
   color: #fff;
   cursor: pointer;
-  font: inherit; /* Use font style from parent element */
+  font-size: 18px; /* Larger font size for more prominence */
+  transition: color 0.3s ease, text-shadow 0.3s ease; /* Smooth color transition */
+}
+
+.navbar ul li button:hover {
+  color: #FFD700; /* Gold hover effect */
+  text-shadow: 0px 0px 8px rgba(255, 215, 0, 0.8); /* Glow effect on hover */
 }
