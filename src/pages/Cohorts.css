@@ -1,24 +1,24 @@
-Background with GIF
+/* Background with GIF */
 body {
   margin: 0;
   padding: 0;
   font-family: Arial, sans-serif;
-  background: url('https://i.pinimg.com/originals/2d/6f/8e/2d6f8e8f2f7e0a6a7e0f6f7a6f7e0a6a7e0f6f7e0a6a7e0f6f7e0a6a7e0f6f7') no-repeat center center fixed;
+  background: url('/public/‘Everybody\ wants\ to\ build\ and\ nobody\ wants\ to\ do\ maintenance’.gif') no-repeat center center fixed;
   background-size: cover;
 }
 
-/* Glassmorphism effect for cards */
+/* Glassmorphism effect for cohorts */
 .cohorts {
   padding: 20px;
-  background: rgba(255, 255, 255, 0.1); /* Slightly transparent background */
-  backdrop-filter: blur(10px); /* Blurring effect */
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
   border-radius: 15px;
 }
 
 h2 {
   text-align: center;
   margin-bottom: 20px;
-  color: #ffffff; /* Changed to white for better contrast on the GIF background */
+  color: #ffffff;
 }
 
 .cohort-list {
@@ -28,14 +28,18 @@ h2 {
 }
 
 .cohort-card {
-  background: rgba(255, 255, 255, 0.2); /* Semi-transparent background */
-  border: 1px solid rgba(255, 255, 255, 0.3); /* Light border for better visibility */
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 12px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
   margin: 15px;
   overflow: hidden;
   width: 300px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center content horizontally */
+  text-align: center; /* Center content text */
 }
 
 .cohort-card:hover {
@@ -59,16 +63,23 @@ h2 {
 
 .cohort-card-content {
   padding: 15px;
-  color: #ffffff; /* Adjust text color for better readability */
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
 
 .cohort-card-title {
-  font-size: 1.2em;
+  font-size: 1.4em; /* Slightly larger font size for better prominence */
   margin: 0;
-  color: #ffffff; /* Changed to white for better contrast */
+  color: rgb(43, 226, 180); /* Bright color for title */
+  font-weight: bold; /* Make the title bold */
 }
 
 .cohort-card-description {
-  color: #eeeeee; /* Light color for description text */
+  color: #eeeeee;
   margin: 10px 0 0;
+  text-align: center; /* Center the description text */
 }

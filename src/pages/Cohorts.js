@@ -34,10 +34,12 @@ const Cohorts = () => {
       <div className="cohort-list">
         {filteredCohorts.map(cohort => (
           <div key={cohort.id} className="cohort-card">
-            <Link to={`/classes/${cohort.id}`}>
-              <img src={cohort.poster_url} alt={`${cohort.name} poster`} className="cohort-poster" />
-              <div className="cohort-name">{cohort.name}</div>
-              <p className="cohort-description">{cohort.description}</p>
+            <Link to={`/classes/${cohort.id}`} className="cohort-card-link">
+              <img src={cohort.poster_url} alt={`${cohort.name} poster`} className="cohort-card-image" />
+              <div className="cohort-card-content">
+                <h3 className="cohort-card-title">{cohort.name}</h3>
+                <p className="cohort-card-description">{cohort.description}</p>
+              </div>
             </Link>
           </div>
         ))}

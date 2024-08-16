@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import SearchBar from '../components/SearchBar';
-import './Classes.css';
+import './Classes.css'; // Ensure this CSS file is created and used
 import { authFetch } from '../components/authFetch';
 
 const Classes = () => {
@@ -36,10 +36,12 @@ const Classes = () => {
       <div className="class-list">
         {filteredClasses.map(class_ => (
           <div key={class_.id} className="class-card">
-            <Link to={`/projects/${class_.id}`}>
-              <img src={class_.poster_url} alt={`${class_.name} poster`} className="class-poster" />
-              <div className="class-name">{class_.name}</div>
-              <p className="class-description">{class_.description}</p>
+            <Link to={`/projects/${class_.id}`} className="class-card-link">
+              <img src={class_.poster_url} alt={`${class_.name} poster`} className="class-card-image" />
+              <div className="class-card-content">
+                <h3 className="class-card-title">{class_.name}</h3>
+                <p className="class-card-description">{class_.description}</p>
+              </div>
             </Link>
           </div>
         ))}
