@@ -3,10 +3,49 @@
   display: flex;
   flex-direction: column;
   padding: 20px;
-  background-color: black; /* Bright background color retained */
-  color: #333; /* Text color for contrast */
-  font-family: 'Arial', sans-serif; /* Font for a modern look */
+  background-color: rgba(0, 0, 0, 0.3); /* Adjusted transparency */
+  color: #ffffff; /* White text color */
+  font-family: 'Arial', sans-serif;
   margin-top: 80px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Collapsible section header */
+.collapsible-header {
+  cursor: pointer;
+  font-size: 24px; /* Larger font size for visibility */
+  font-weight: bold;
+  margin-bottom: 10px;
+  padding: 15px 20px; /* Increased padding for a more substantial header */
+  background-color: rgba(0, 0, 0, 0.3); /* Adjusted transparency for header */
+  color: #ffffff; /* White text color */
+  border-radius: 6px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  text-align: center; /* Centered text */
+}
+
+.collapsible-header:hover {
+  background-color: rgba(0, 0, 0, 0.5); /* Slightly darker on hover */
+}
+
+/* Smooth transition for collapsible content */
+.collapsible-content {
+  max-height: 1000px;
+  overflow: hidden;
+  transition: max-height 0.4s ease-in-out, opacity 0.4s ease-in-out;
+  opacity: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Evenly space content */
+  background-color: rgba(0, 0, 0, 0.3); /* Adjusted transparency for content */
+  padding: 10px;
+  border-radius: 6px;
+}
+
+.collapsible-content.hidden {
+  max-height: 0;
+  opacity: 0;
 }
 
 /* Glassy form styling */
@@ -18,27 +57,27 @@
   display: flex;
   flex-direction: column;
   gap: 15px;
-  background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+  background: rgba(255, 255, 255, 0.08); /* Increased transparency */
   padding: 20px;
-  border-radius: 12px; /* Rounded corners */
-  backdrop-filter: blur(10px); /* Frosted glass effect */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Enhanced shadow for depth */
-  border: 1px solid rgba(255, 255, 255, 0.3); /* Light border for added effect */
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .form-input {
   padding: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.3); /* Light border color retained */
-  border-radius: 6px; /* Rounded corners for inputs */
-  font-size: 16px; /* Larger text for better readability */
-  margin-bottom: 10px; /* Add margin to create spacing between inputs */
-  background: rgba(255, 255, 255, 0.2); /* Slightly translucent background */
-  color: #000; /* Text color for input fields set to black */
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 6px;
+  font-size: 16px;
+  margin-bottom: 10px;
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
 }
 
 .form-input::placeholder {
-  color: #000; /* Black color for placeholder text */
-  font-weight: bold; /* Bold placeholder text */
+  color: #ffffff;
+  font-weight: bold;
 }
 
 .submit-btn, .add-class-btn {
@@ -46,88 +85,95 @@
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  font-size: 16px; /* Larger text for better readability */
-  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+  font-size: 16px;
+  transition: background-color 0.3s ease;
 }
 
 .submit-btn {
-  background-color: #4caf50; /* Button background color retained */
+  background-color: #4caf50;
   color: #ffffff;
 }
 
 .submit-btn:hover {
-  background-color:blue; /* Button hover color retained */
+  background-color: blue;
 }
 
 .add-class-btn {
-  background-color: #2196F3; /* Add button background color */
+  background-color: #2196F3;
   color: #ffffff;
 }
 
 .add-class-btn:hover {
-  background-color: #1976D2; /* Button hover color retained */
+  background-color: #1976D2;
 }
 
 .delete-btn {
   padding: 6px 12px;
   border: none;
   border-radius: 4px;
-  background-color: #f44336; /* Red background for delete button */
+  background-color: #f44336;
   color: #ffffff;
   cursor: pointer;
-  font-size: 14px; /* Slightly smaller text for delete button */
-  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
-  margin-left: 10px; /* Space between project name and delete button */
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+  margin-left: 10px;
 }
 
 .delete-btn:hover {
-  background-color: #d32f2f; /* Darker red for hover effect */
+  background-color: #d32f2f;
 }
 
 .dashboard-content {
   display: flex;
-  flex-wrap: wrap; /* Allows items to wrap on smaller screens */
+  flex-wrap: wrap;
   gap: 20px;
   margin-top: 20px;
 }
 
 .user-list, .recent-projects, .cohort-list {
   flex: 1;
-  min-width: 300px; /* Ensure sections don't get too narrow */
-  background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+  min-width: 300px;
+  background: rgba(0, 0, 0, 0.3); /* Adjusted transparency */
   padding: 20px;
-  border-radius: 12px; /* Rounded corners */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Enhanced shadow for depth */
-  backdrop-filter: blur(10px); /* Frosted glass effect */
-  color: #ffffff; /* White text color */
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Evenly space content */
 }
 
 .user-list ul, .recent-projects ul, .cohort-list ul {
-  list-style-type: none; /* Remove default list styling */
+  list-style-type: none;
   padding: 0;
+  margin: 0; /* Remove default margin */
+  flex-grow: 1; /* Make list items take up remaining space */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Evenly space list items */
 }
 
 .user-list li, .recent-projects li, .cohort-list li {
-  margin-bottom: 10px; /* Space between list items */
+  margin-bottom: 10px;
   display: flex;
-  justify-content: space-between; /* Space out list items */
+  justify-content: space-between;
   align-items: center;
-  color: #ffffff; /* White text color for list items */
+  color: #ffffff;
 }
 
 .user-list li, .cohort-list li {
-  background-color: rgba(255, 255, 255, 0.2); /* Light glassy background for list items */
+  background-color: rgba(255, 255, 255, 0.2);
   padding: 10px;
-  border-radius: 6px; /* Rounded corners for list items */
+  border-radius: 6px;
 }
 
 .recent-projects li {
-  cursor: pointer; /* Pointer cursor for clickable projects */
-  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .recent-projects li:hover {
-  background-color: rgba(255, 255, 255, 0.3); /* Light grey glassy effect on hover */
+  background-color: rgba(255, 255, 255, 0.3);
 }
 
 .project-details {
@@ -135,26 +181,65 @@
   flex-direction: column;
   align-items: flex-start;
   margin-top: 20px;
-  background-color: #ffffff; /* Background color for project details */
+  background-color: rgba(255, 255, 255, 0.9); /* Slightly opaque to stand out from background */
   padding: 20px;
-  border-radius: 12px; /* Rounded corners */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Enhanced shadow for depth */
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .project-image {
-  width: 200px; /* Adjust size as needed */
+  width: 200px;
   height: auto;
   border-radius: 8px;
-  margin-bottom: 15px; /* Space below the image */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for image */
+  margin-bottom: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+/* Styling for Search Bars */
+.search-bar {
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.search-bar input {
+  width: calc(100% - 20px);
+  padding: 10px 10px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background-color: rgba(0, 0, 0, 0.5); /* Adjusted transparency */
+  color: #ffffff;
+  font-size: 14px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+}
+
+.search-bar input::placeholder {
+  color: #ffffff;
+}
+
+.search-bar input:focus {
+  background-color: rgba(0, 0, 0, 0.7);
+  outline: none;
+}
+
+/* Add Section Styling */
+.add-section {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.add-project, .add-cohort {
+  flex: 1;
+}
+
+/* Responsive adjustments */
 @media (max-width: 768px) {
-  .dashboard-content {
-    flex-direction: column; /* Stack sections vertically on smaller screens */
+  .dashboard-content, .add-section {
+    flex-direction: column;
   }
 
-  .user-list, .recent-projects, .cohort-list {
-    width: 100%; /* Full width for smaller screens */
+  .user-list, .recent-projects, .cohort-list, .add-project, .add-cohort {
+    width: 100%;
   }
 }

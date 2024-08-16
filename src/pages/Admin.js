@@ -40,6 +40,17 @@ function Admin() {
     classes: [{ name: '', description: '' }]
   });
   const [cohorts, setCohorts] = useState([]);
+
+  const [userSearchQuery, setUserSearchQuery] = useState('');
+  const [projectSearchQuery, setProjectSearchQuery] = useState('');
+  const [cohortSearchQuery, setCohortSearchQuery] = useState('');
+
+  const [showCohortList, setShowCohortList] = useState(true);
+  const [showUserList, setShowUserList] = useState(true);
+  const [showRecentProjects, setShowRecentProjects] = useState(true);
+  const [showAddProject, setShowAddProject] = useState(true);
+  const [showAddCohort, setShowAddCohort] = useState(true);
+
   const navigate = useNavigate();
 
   // Check if the user is an admin
@@ -161,164 +172,236 @@ function Admin() {
     });
   };
 
+  // Filter users, projects, and cohorts based on their respective search queries
+  const filteredUsers = users.filter(user =>
+    user.username.toLowerCase().includes(userSearchQuery.toLowerCase()) ||
+    user.email.toLowerCase().includes(userSearchQuery.toLowerCase())
+  );
+
+  const filteredProjects = recentProjects.filter(project =>
+    project.name.toLowerCase().includes(projectSearchQuery.toLowerCase()) ||
+    project.description.toLowerCase().includes(projectSearchQuery.toLowerCase())
+  );
+
+  const filteredCohorts = cohorts.filter(cohort =>
+    cohort.name.toLowerCase().includes(cohortSearchQuery.toLowerCase()) ||
+    cohort.description.toLowerCase().includes(cohortSearchQuery.toLowerCase())
+  );
+
   return (
     <div className="admin-dashboard">
-      <div className="add-project">
-        <h2>Add New Project</h2>
-        <form onSubmit={handleAddProject} className="add-project-form">
-          <input
-            type="text"
-            placeholder="Project Name"
-            value={newProject.name}
-            onChange={(e) => setNewProject({ ...newProject, name: e.target.value })}
-            className="form-input"
-          />
-          <input
-            type="text"
-            placeholder="Description"
-            value={newProject.description}
-            onChange={(e) => setNewProject({ ...newProject, description: e.target.value })}
-            className="form-input"
-          />
-          <input
-            type="text"
-            placeholder="Owner ID"
-            value={newProject.owner_id}
-            onChange={(e) => setNewProject({ ...newProject, owner_id: e.target.value })}
-            className="form-input"
-          />
-          <input
-            type="text"
-            placeholder="GitHub Link"
-            value={newProject.github_link}
-            onChange={(e) => setNewProject({ ...newProject, github_link: e.target.value })}
-            className="form-input"
-          />
-          <input
-            type="text"
-            placeholder="Class ID"
-            value={newProject.class_id}
-            onChange={(e) => setNewProject({ ...newProject, class_id: e.target.value })}
-            className="form-input"
-          />
-          <input
-            type="text"
-            placeholder="Poster URL"
-            value={newProject.poster_url}
-            onChange={(e) => setNewProject({ ...newProject, poster_url: e.target.value })}
-            className="form-input"
-          />
-          <button type="submit" className="submit-btn">Add Project</button>
-        </form>
-      </div>
-
-      <div className="add-cohort">
-        <h2>Add New Cohort</h2>
-        <form onSubmit={handleAddCohort} className="add-cohort-form">
-          <input
-            type="text"
-            placeholder="Cohort Name"
-            value={newCohort.name}
-            onChange={(e) => setNewCohort({ ...newCohort, name: e.target.value })}
-            className="form-input"
-          />
-          <input
-            type="text"
-            placeholder="Cohort Description"
-            value={newCohort.description}
-            onChange={(e) => setNewCohort({ ...newCohort, description: e.target.value })}
-            className="form-input"
-          />
-          
-          <h3>Classes</h3>
-          {newCohort.classes.map((cls, idx) => (
-            <div key={idx} className="class-input-group">
+      <div className="collapsible-section">
+        <h2 onClick={() => setShowCohortList(!showCohortList)} className="collapsible-header">
+          Cohort List
+        </h2>
+        {showCohortList && (
+          <div className="cohort-list">
+            <div className="search-bar">
               <input
                 type="text"
-                placeholder="Class Name"
-                value={cls.name}
-                onChange={(e) => {
-                  const newClasses = [...newCohort.classes];
-                  newClasses[idx].name = e.target.value;
-                  setNewCohort({ ...newCohort, classes: newClasses });
-                }}
-                className="form-input"
-              />
-              <input
-                type="text"
-                placeholder="Class Description"
-                value={cls.description}
-                onChange={(e) => {
-                  const newClasses = [...newCohort.classes];
-                  newClasses[idx].description = e.target.value;
-                  setNewCohort({ ...newCohort, classes: newClasses });
-                }}
-                className="form-input"
+                placeholder="Search Cohorts..."
+                value={cohortSearchQuery}
+                onChange={(e) => setCohortSearchQuery(e.target.value)}
               />
             </div>
-          ))}
-          <button type="button" onClick={handleAddClassField} className="add-class-btn">Add Another Class</button>
-          <button type="submit" className="submit-btn">Add Cohort with Classes</button>
-        </form>
+            <ul>
+              {filteredCohorts.length > 0 ? (
+                filteredCohorts.map((cohort) => (
+                  <li key={cohort.id}>
+                    {cohort.name}
+                    <button
+                      className="delete-btn"
+                      onClick={() => handleDeleteCohort(cohort.id)}
+                    >
+                      Delete Cohort
+                    </button>
+                  </li>
+                ))
+              ) : (
+                <p>No cohorts available</p>
+              )}
+            </ul>
+          </div>
+        )}
       </div>
 
       <div className="dashboard-content">
-        <div className="user-list">
-          <h2>User List</h2>
-          <ul>
-            {users.length > 0 ? (
-              users.map((user) => (
-                <li key={user.id}>
-                  {user.username} - {user.email}
-                </li>
-              ))
-            ) : (
-              <p>No users available</p>
-            )}
-          </ul>
+        <div className="collapsible-section">
+          <h2 onClick={() => setShowUserList(!showUserList)} className="collapsible-header">
+            User List
+          </h2>
+          {showUserList && (
+            <div className="user-list">
+              <div className="search-bar">
+                <input
+                  type="text"
+                  placeholder="Search Users..."
+                  value={userSearchQuery}
+                  onChange={(e) => setUserSearchQuery(e.target.value)}
+                />
+              </div>
+              <ul>
+                {filteredUsers.length > 0 ? (
+                  filteredUsers.map((user) => (
+                    <li key={user.id}>
+                      {user.username} - {user.email}
+                    </li>
+                  ))
+                ) : (
+                  <p>No users available</p>
+                )}
+              </ul>
+            </div>
+          )}
         </div>
 
-        <div className="recent-projects">
-          <h2>Recent Projects</h2>
-          <ul>
-            {recentProjects.length > 0 ? (
-              recentProjects.map((project) => (
-                <li key={project.id} onClick={() => handleProjectClick(project)}>
-                  {project.name}
-                  <button
-                    className="delete-btn"
-                    onClick={(e) => handleDeleteProject(e, project.id)}
-                  >
-                    Delete
-                  </button>
-                </li>
-              ))
-            ) : (
-              <p>No recent projects available</p>
-            )}
-          </ul>
+        <div className="collapsible-section">
+          <h2 onClick={() => setShowRecentProjects(!showRecentProjects)} className="collapsible-header">
+            Recent Projects
+          </h2>
+          {showRecentProjects && (
+            <div className="recent-projects">
+              <div className="search-bar">
+                <input
+                  type="text"
+                  placeholder="Search Projects..."
+                  value={projectSearchQuery}
+                  onChange={(e) => setProjectSearchQuery(e.target.value)}
+                />
+              </div>
+              <ul>
+                {filteredProjects.length > 0 ? (
+                  filteredProjects.map((project) => (
+                    <li key={project.id} onClick={() => handleProjectClick(project)}>
+                      {project.name}
+                      <button
+                        className="delete-btn"
+                        onClick={(e) => handleDeleteProject(e, project.id)}
+                      >
+                        Delete
+                      </button>
+                    </li>
+                  ))
+                ) : (
+                  <p>No recent projects available</p>
+                )}
+              </ul>
+            </div>
+          )}
         </div>
       </div>
 
-      <div className="cohort-list">
-        <h2>Cohort List</h2>
-        <ul>
-          {cohorts.length > 0 ? (
-            cohorts.map((cohort) => (
-              <li key={cohort.id}>
-                {cohort.name}
-                <button
-                  className="delete-btn"
-                  onClick={() => handleDeleteCohort(cohort.id)}
-                >
-                  Delete Cohort
-                </button>
-              </li>
-            ))
-          ) : (
-            <p>No cohorts available</p>
+      <div className="add-section">
+        <div className="collapsible-section">
+          <h2 onClick={() => setShowAddProject(!showAddProject)} className="collapsible-header">
+            Add New Project
+          </h2>
+          {showAddProject && (
+            <div className="add-project">
+              <form onSubmit={handleAddProject} className="add-project-form">
+                <input
+                  type="text"
+                  placeholder="Project Name"
+                  value={newProject.name}
+                  onChange={(e) => setNewProject({ ...newProject, name: e.target.value })}
+                  className="form-input"
+                />
+                <input
+                  type="text"
+                  placeholder="Description"
+                  value={newProject.description}
+                  onChange={(e) => setNewProject({ ...newProject, description: e.target.value })}
+                  className="form-input"
+                />
+                <input
+                  type="text"
+                  placeholder="Owner ID"
+                  value={newProject.owner_id}
+                  onChange={(e) => setNewProject({ ...newProject, owner_id: e.target.value })}
+                  className="form-input"
+                />
+                <input
+                  type="text"
+                  placeholder="GitHub Link"
+                  value={newProject.github_link}
+                  onChange={(e) => setNewProject({ ...newProject, github_link: e.target.value })}
+                  className="form-input"
+                />
+                <input
+                  type="text"
+                  placeholder="Class ID"
+                  value={newProject.class_id}
+                  onChange={(e) => setNewProject({ ...newProject, class_id: e.target.value })}
+                  className="form-input"
+                />
+                <input
+                  type="text"
+                  placeholder="Poster URL"
+                  value={newProject.poster_url}
+                  onChange={(e) => setNewProject({ ...newProject, poster_url: e.target.value })}
+                  className="form-input"
+                />
+                <button type="submit" className="submit-btn">Add Project</button>
+              </form>
+            </div>
           )}
-        </ul>
+        </div>
+
+        <div className="collapsible-section">
+          <h2 onClick={() => setShowAddCohort(!showAddCohort)} className="collapsible-header">
+            Add New Cohort
+          </h2>
+          {showAddCohort && (
+            <div className="add-cohort">
+              <form onSubmit={handleAddCohort} className="add-cohort-form">
+                <input
+                  type="text"
+                  placeholder="Cohort Name"
+                  value={newCohort.name}
+                  onChange={(e) => setNewCohort({ ...newCohort, name: e.target.value })}
+                  className="form-input"
+                />
+                <input
+                  type="text"
+                  placeholder="Cohort Description"
+                  value={newCohort.description}
+                  onChange={(e) => setNewCohort({ ...newCohort, description: e.target.value })}
+                  className="form-input"
+                />
+                
+                <h3>Classes</h3>
+                {newCohort.classes.map((cls, idx) => (
+                  <div key={idx} className="class-input-group">
+                    <input
+                      type="text"
+                      placeholder="Class Name"
+                      value={cls.name}
+                      onChange={(e) => {
+                        const newClasses = [...newCohort.classes];
+                        newClasses[idx].name = e.target.value;
+                        setNewCohort({ ...newCohort, classes: newClasses });
+                      }}
+                      className="form-input"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Class Description"
+                      value={cls.description}
+                      onChange={(e) => {
+                        const newClasses = [...newCohort.classes];
+                        newClasses[idx].description = e.target.value;
+                        setNewCohort({ ...newCohort, classes: newClasses });
+                      }}
+                      className="form-input"
+                    />
+                  </div>
+                ))}
+                <button type="button" onClick={handleAddClassField} className="add-class-btn">Add Another Class</button>
+                <button type="submit" className="submit-btn">Add Cohort with Classes</button>
+              </form>
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Display selected project details */}
