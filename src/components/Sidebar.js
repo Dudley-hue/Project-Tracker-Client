@@ -4,7 +4,7 @@ import './Sidebar.css';
 
 const Sidebar = ({ isAdmin }) => (
   <div className="sidebar">
-    <h1>ArteDante.</h1>
+    
     <nav>
       <ul>
         <li><Link to="/">Home</Link></li>

@@ -4,6 +4,7 @@
   height: 100vh;
   background: url('../images/abstract-flow-background.jpg') no-repeat center center fixed;
   background-size: cover;
+  margin-top: 80px;
 }
 
 .content {

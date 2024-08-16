@@ -20,17 +20,28 @@ function Projects() {
   }, []);
 
   return (
-    <div>
-      <h1>Projects</h1>
+    <div className="projects-container">
+      <h1 className="projects-title">Projects</h1>
       {error && <p className="error">{error}</p>}
       <div className="project-list">
-        {projects.map(project => (
+        {projects.map((project) => (
           <div key={project.id} className="project-card">
-            {project.poster_url && <img src={project.poster_url} alt={project.name} className="project-image" />}
+            {project.poster_url && (
+              <img
+                src={project.poster_url}
+                alt={project.name}
+                className="project-image"
+              />
+            )}
             <h2>{project.name}</h2>
             <p className="project-description">{project.description}</p>
             {project.github_link && (
-              <a href={project.github_link} target="_blank" rel="noopener noreferrer">
+              <a
+                href={project.github_link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="github-link"
+              >
                 View on GitHub
               </a>
             )}

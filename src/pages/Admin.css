@@ -3,9 +3,10 @@
   display: flex;
   flex-direction: column;
   padding: 20px;
-  background-color: #ac1818; /* Bright background color retained */
+  background-color: black; /* Bright background color retained */
   color: #333; /* Text color for contrast */
   font-family: 'Arial', sans-serif; /* Font for a modern look */
+  margin-top: 80px;
 }
 
 /* Glassy form styling */
@@ -55,7 +56,7 @@
 }
 
 .submit-btn:hover {
-  background-color: #45a049; /* Button hover color retained */
+  background-color:blue; /* Button hover color retained */
 }
 
 .add-class-btn {
