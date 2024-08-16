@@ -13,6 +13,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Logout from './pages/Logout';
 import Student from './pages/Student';
+import RecentProjectsCarousel from './pages/RecentProjectsCarousel'; // Import the new component
 import './App.css';
 
 // ProtectedRoute Component
@@ -84,6 +85,7 @@ function App() {
             <Route path="/projects/:classId" element={<ProtectedRoute isAuthenticated={isAuthenticated}><Projects /></ProtectedRoute>} />
             <Route path="/admin" element={<AdminRoute isAdmin={isAdmin}><Admin /></AdminRoute>} />
             <Route path="/student" element={<ProtectedRoute isAuthenticated={isAuthenticated}><Student /></ProtectedRoute>} />
+            <Route path="/recent-projects" element={<RecentProjectsCarousel />} /> {/* New Route */}
             <Route path="/login" element={isAuthenticated ? <Navigate to={isAdmin ? "/admin" : "/"} /> : <Login />} />
             <Route path="/register" element={isAuthenticated ? <Navigate to={isAdmin ? "/admin" : "/"} /> : <Register />} />
             <Route path="/logout" element={<Logout />} />
@@ -94,7 +96,6 @@ function App() {
       </div>
     </Router>
   );
-
 }
 
 export default App;

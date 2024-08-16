@@ -10,7 +10,7 @@ body {
 /* Glassmorphism effect for projects */
 .projects {
   padding: 20px;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(10px);
   border-radius: 15px;
 }
@@ -29,7 +29,7 @@ h2 {
 }
 
 .project-card {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(131, 131, 131, 0.2);
   border-radius: 15px;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);

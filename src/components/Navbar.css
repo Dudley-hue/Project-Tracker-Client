@@ -25,6 +25,7 @@
 .navbar ul li {
   margin: 0 20px; /* Increased margin for more spacing between items */
   font-size: 1.1rem; /* Slightly larger font size */
+  position: relative; /* For positioning dropdown */
 }
 
 .navbar ul li a {
@@ -54,4 +55,38 @@
 .navbar ul li button:hover {
   background-color: rgba(255, 255, 255, 0.2); /* Subtle background change on hover */
   color: #fff; /* Keep text color white on hover */
+}
+
+/* Dropdown Menu Styles */
+.profile-dropdown {
+  position: relative; /* For dropdown positioning */
+}
+
+.dropdown-menu {
+  display: block; /* Show the dropdown menu */
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: linear-gradient(90deg, #6a11cb, #ff007f); /* Match navbar gradient */
+  border: 1px solid #fff; /* White border for visibility */
+  border-radius: 4px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  min-width: 150px;
+  z-index: 2000; /* Ensure dropdown is above other content */
+}
+
+.dropdown-menu li {
+  padding: 8px 12px;
+}
+
+.dropdown-menu li a {
+  text-decoration: none;
+  color: #fff; /* Match text color with navbar */
+  display: block;
+}
+
+.dropdown-menu li a:hover {
+  background-color: rgba(255, 255, 255, 0.2); /* Subtle background change on hover */
 }

@@ -22,13 +22,14 @@
 }
 
 .sidebar nav ul li a {
-  color: #e7e5ee;
+  color: #0e131b;
   text-decoration: none;
   display: flex;
   align-items: center;
   padding: 10px;
   border-radius: 5px;
   transition: background-color 0.3s ease; /* Smooth transition */
+  font-size: 22px;
 }
 
 .sidebar nav ul li a:hover {

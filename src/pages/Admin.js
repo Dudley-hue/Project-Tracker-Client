@@ -40,6 +40,12 @@ function Admin() {
     classes: [{ name: '', description: '' }]
   });
   const [cohorts, setCohorts] = useState([]);
+  const [selectedCohort, setSelectedCohort] = useState(null);
+  const [editCohort, setEditCohort] = useState({
+    name: '',
+    description: '',
+    classes: [{ name: '', description: '' }]
+  });
 
   const [userSearchQuery, setUserSearchQuery] = useState('');
   const [projectSearchQuery, setProjectSearchQuery] = useState('');
@@ -164,6 +170,36 @@ function Admin() {
     }
   };
 
+  // Handle editing a cohort
+  const handleEditCohort = (cohort) => {
+    setSelectedCohort(cohort);
+    setEditCohort({
+      name: cohort.name,
+      description: cohort.description,
+      classes: cohort.classes || [{ name: '', description: '' }]
+    });
+  };
+
+  // Handle updating an existing cohort
+  const handleUpdateCohort = async (e) => {
+    e.preventDefault();
+    try {
+      const updatedCohort = await authFetch(`http://127.0.0.1:5000/api/cohorts/${selectedCohort.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(editCohort)
+      });
+      // Update the cohorts list with the updated cohort
+      const updatedCohorts = cohorts.map(cohort => 
+        cohort.id === selectedCohort.id ? updatedCohort : cohort
+      );
+      setCohorts(updatedCohorts);
+      setSelectedCohort(null); // Clear the form after update
+    } catch (error) {
+      console.error('Error updating cohort:', error);
+    }
+  };
+
   // Handle adding more classes to the new cohort form
   const handleAddClassField = () => {
     setNewCohort({
@@ -209,12 +245,20 @@ function Admin() {
                 filteredCohorts.map((cohort) => (
                   <li key={cohort.id}>
                     {cohort.name}
-                    <button
-                      className="delete-btn"
-                      onClick={() => handleDeleteCohort(cohort.id)}
-                    >
-                      Delete Cohort
-                    </button>
+                    <div>
+                      <button
+                        className="delete-btn"
+                        onClick={() => handleDeleteCohort(cohort.id)}
+                      >
+                        Delete Cohort
+                      </button>
+                      <button
+                        className="edit-btn"
+                        onClick={() => handleEditCohort(cohort)}
+                      >
+                        Edit Cohort
+                      </button>
+                    </div>
                   </li>
                 ))
               ) : (
@@ -403,6 +447,63 @@ function Admin() {
           )}
         </div>
       </div>
+
+      {/* Edit Cohort Section */}
+      {selectedCohort && (
+        <div className="collapsible-section">
+          <h2 onClick={() => setShowAddCohort(!showAddCohort)} className="collapsible-header">
+            Edit Cohort
+          </h2>
+          <div className="add-cohort">
+            <form onSubmit={handleUpdateCohort} className="add-cohort-form">
+              <input
+                type="text"
+                placeholder="Cohort Name"
+                value={editCohort.name}
+                onChange={(e) => setEditCohort({ ...editCohort, name: e.target.value })}
+                className="form-input"
+              />
+              <input
+                type="text"
+                placeholder="Cohort Description"
+                value={editCohort.description}
+                onChange={(e) => setEditCohort({ ...editCohort, description: e.target.value })}
+                className="form-input"
+              />
+              
+              <h3>Classes</h3>
+              {editCohort.classes.map((cls, idx) => (
+                <div key={idx} className="class-input-group">
+                  <input
+                    type="text"
+                    placeholder="Class Name"
+                    value={cls.name}
+                    onChange={(e) => {
+                      const newClasses = [...editCohort.classes];
+                      newClasses[idx].name = e.target.value;
+                      setEditCohort({ ...editCohort, classes: newClasses });
+                    }}
+                    className="form-input"
+                  />
+                  <input
+                    type="text"
+                    placeholder="Class Description"
+                    value={cls.description}
+                    onChange={(e) => {
+                      const newClasses = [...editCohort.classes];
+                      newClasses[idx].description = e.target.value;
+                      setEditCohort({ ...editCohort, classes: newClasses });
+                    }}
+                    className="form-input"
+                  />
+                </div>
+              ))}
+              <button type="button" onClick={handleAddClassField} className="add-class-btn">Add Another Class</button>
+              <button type="submit" className="submit-btn">Update Cohort</button>
+            </form>
+          </div>
+        </div>
+      )}
 
       {/* Display selected project details */}
       {selectedProject && (
