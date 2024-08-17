@@ -2,7 +2,7 @@
 
 .navbar {
   background: linear-gradient(90deg, #6a11cb, #ff007f); /* Purple to pink gradient */
-  padding: 15px; /* Increased padding for more spacing */
+  padding: 10px; /* Increased padding for more spacing */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Slightly larger shadow for depth */
   position: fixed;
   top: 0;
@@ -23,8 +23,8 @@
 }
 
 .navbar ul li {
-  margin: 0 20px; /* Increased margin for more spacing between items */
-  font-size: 1.1rem; /* Slightly larger font size */
+  margin: 0 15px; /* Increased margin for more spacing between items */
+  font-size: 1.5rem; /* Slightly larger font size */
   position: relative; /* For positioning dropdown */
 }
 
@@ -65,13 +65,14 @@
 .dropdown-menu {
   display: block; /* Show the dropdown menu */
   position: absolute;
-  top: 100%;
+  top: 50%;
   right: 0;
   background: linear-gradient(90deg, #6a11cb, #ff007f); /* Match navbar gradient */
   border: 1px solid #fff; /* White border for visibility */
   border-radius: 4px;
   list-style: none;
-  padding: 0;
+  height: auto;
+  padding: 15px;
   margin: 0;
   min-width: 150px;
   z-index: 2000; /* Ensure dropdown is above other content */

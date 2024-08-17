@@ -1,277 +1,101 @@
-/* Overall Dashboard Styles */
 .student-dashboard {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  align-items: center;
   padding: 20px;
-  background: #1e1e1e; /* Dark background for the page */
-  color: #f5f5f5; /* Light text color */
-  min-height: 100vh;
+  width: 100%;
 }
 
-/* Project List Styles */
+.add-project {
+  margin-bottom: 20px;
+  margin-top: 40px;
+  width: 100%;
+}
+
+.show-add-form-btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.add-project-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: 600px; /* Add a max width to limit the form size */
+}
+
 .project-list {
-  width: 70%;
-  padding: 20px; /* Increased padding for better spacing */
-  background: #2c2c2c; /* Darker background for the list */
-  border-radius: 12px; /* Rounded corners */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4); /* Enhanced shadow */
-  margin-right: 20px;
-  overflow-y: auto; /* Enable vertical scrolling */
-  max-height: 80vh; /* Limit height to enable scrolling */
-  transition: transform 0.3s;
+  width: 100%;
 }
 
-.project-list:hover {
-  transform: scale(1.02); /* Slightly scale up on hover */
+.search-input {
+  margin-bottom: 20px;
+  padding: 10px;
+  font-size: 16px;
+  width: 100%;
+  max-width: 600px; /* Match the width with the form */
 }
 
-.project-list h2 {
-  font-size: 1.5em;
-  margin-bottom: 15px; /* Increased margin */
-  color: #f5f5f5; /* Light color for headers */
+.project-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: flex-start; /* Align items to the left */
 }
 
-.project-list input {
-  width: calc(100% - 24px); /* Adjusted width */
-  padding: 14px; /* Increased padding */
-  margin-bottom: 20px; /* Increased margin */
-  border: 1px solid #555; /* Slightly lighter border */
-  border-radius: 8px; /* Rounded corners */
-  background: #444; /* Darker background for input */
-  color: #f5f5f5; /* Light text color for input */
-  font-size: 1em; /* Adjusted font size */
-  transition: background 0.3s;
-}
-
-.project-list input:focus {
-  background: #555; /* Lighter on focus */
-  outline: none;
-}
-
-/* Project Item Styles */
 .project-item {
-  padding: 15px;
-  margin-bottom: 15px; /* Increased margin */
-  background: #3a3a3a; /* Slightly lighter dark background for items */
-  border: 1px solid #555; /* Slightly lighter border */
-  border-radius: 8px; /* Rounded corners */
-  cursor: pointer;
-  transition: background 0.3s, box-shadow 0.3s, transform 0.3s;
-}
-
-.project-item:hover {
-  background: #444; /* Lighter on hover */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5); /* Enhanced shadow */
-  transform: translateY(-2px); /* Slightly lift on hover */
-}
-
-.project-title {
-  font-size: 1.4em; /* Slightly larger title */
-  font-weight: bold;
-}
-
-/* Poster Image Styles */
-.project-poster {
-  max-width: 60%; /* Increased width */
-  height: auto; /* Maintain aspect ratio */
-  margin-top: 20px;
-  border-radius: 8px; /* Rounded corners */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Subtle shadow */
-}
-
-/* Popup Card Styles */
-.project-popup {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: rgba(0, 0, 0, 0.9); /* Darker background */
-  color: #f5f5f5;
-  padding: 30px;
-  border-radius: 12px; /* Rounded corners */
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6); /* Enhanced shadow */
-  z-index: 1000;
-  width: 80%;
-  max-width: 600px;
-  display: none; /* Hidden by default */
-  transition: opacity 0.3s ease;
-}
-
-.project-popup.visible {
-  display: block; /* Show when active */
-  opacity: 1;
-}
-
-.project-popup .close-btn {
-  background: #dc3545;
-  color: #fff;
-  border: none;
-  border-radius: 8px; /* Rounded corners */
-  padding: 14px 24px; /* Larger padding */
-  cursor: pointer;
-  transition: background 0.3s, transform 0.3s;
-  font-size: 1.1em; /* Larger font size */
-}
-
-.project-popup .close-btn:hover {
-  background: #c82333;
-  transform: scale(1.05); /* Slightly scale up on hover */
-}
-
-/* Form Styles with Glassmorphism */
-.glassy-form {
-  background: rgba(50, 50, 50, 0.8); /* Dark glass effect */
-  backdrop-filter: blur(12px); /* Increased blur */
+  border: 1px solid #ccc;
   padding: 20px;
-  border-radius: 12px; /* Rounded corners */
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4); /* Enhanced shadow */
+  border-radius: 5px;
+  width: calc(30% - 20px); /* Adjust to fit three items per row with gaps */
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Align items to the start (left) */
 }
 
-.glassy-form h2, .glassy-form h3 {
-  margin-top: 0;
-  color: #f5f5f5; /* Light color for headers */
+.project-card {
+  display: flex;
+  flex-direction: row; /* Align image and button horizontally */
+  align-items: center; /* Center items vertically */
+  gap: 20px; /* Space between the image and button */
 }
 
-.glassy-form p {
+.project-item h3 {
+  margin: 10px 0;
+  font-size: 18px;
+}
+
+.project-image {
+  width: 150px; /* Increase the image size */
+  height: 150px; /* Increase the image size */
   margin: 10px 0;
 }
 
-.glassy-form input, .glassy-form textarea {
-  width: calc(100% - 24px); /* Adjusted width */
-  padding: 14px; /* Increased padding */
-  margin-bottom: 15px; /* Increased margin */
-  border: 1px solid #555; /* Slightly lighter border */
-  border-radius: 8px; /* Rounded corners */
-  background: #444; /* Darker background for inputs */
-  color: #f5f5f5; /* Light text color */
-  font-size: 1em; /* Adjusted font size */
-  transition: background 0.3s;
-}
-
-.glassy-form input:focus, .glassy-form textarea:focus {
-  background: #555; /* Lighter on focus */
-  outline: none;
-}
-
-.glassy-form button {
-  padding: 14px 24px; /* Larger padding */
-  border: none;
-  border-radius: 8px; /* Rounded corners */
-  background: #007bff;
-  color: #fff;
-  font-size: 1.2em; /* Larger font size */
+.edit-btn {
+  padding: 10px 20px;
+  font-size: 16px;
   cursor: pointer;
-  transition: background 0.3s, transform 0.3s;
 }
 
-.glassy-form button:hover {
-  background: #0056b3;
-  transform: scale(1.05); /* Slightly scale up on hover */
-}
-
-.glassy-form .cancel-btn {
-  background: #dc3545;
-}
-
-.glassy-form .cancel-btn:hover {
-  background: #c82333;
-  transform: scale(1.05); /* Slightly scale up on hover */
-}
-
-/* Add Project Form Styles */
-.add-project-form {
+.update-project-form {
   margin-top: 20px;
-  padding: 20px;
-  background: rgba(50, 50, 50, 0.8); /* Dark glass effect */
-  backdrop-filter: blur(12px); /* Increased blur */
-  border-radius: 12px; /* Rounded corners */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4); /* Enhanced shadow */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: 500px; /* Reduce the width for the update form */
 }
 
-.add-project-form h2 {
-  margin-bottom: 15px;
-  color: #f5f5f5; /* Light color for header */
-  font-size: 1.8em; /* Larger font size for title */
+.form-input {
+  padding: 10px;
+  font-size: 16px;
 }
 
-.add-project-form input, .add-project-form textarea {
-  width: calc(100% - 24px); /* Adjusted width */
-  padding: 14px; /* Increased padding */
-  margin-bottom: 15px; /* Increased margin */
-  border: 1px solid #555; /* Slightly lighter border */
-  border-radius: 8px; /* Rounded corners */
-  background: #444; /* Darker background for inputs */
-  color: #f5f5f5; /* Light text color */
-  font-size: 1em; /* Adjusted font size */
-  transition: background 0.3s;
-}
-
-.add-project-form input:focus, .add-project-form textarea:focus {
-  background: #555; /* Lighter on focus */
-  outline: none;
-}
-
-.add-project-form button {
-  padding: 14px 24px; /* Larger padding */
-  border: none;
-  border-radius: 8px; /* Rounded corners */
-  background: #007bff;
-  color: #fff;
-  font-size: 1.2em; /* Larger font size */
+.submit-btn {
+  padding: 10px 20px;
+  font-size: 16px;
   cursor: pointer;
-  transition: background 0.3s, transform 0.3s;
-}
-
-.add-project-form button:hover {
-  background: #0056b3;
-  transform: scale(1.05); /* Slightly scale up on hover */
-}
-
-/* Add Member Form Styles */
-.add-member-form {
-  margin-top: 20px;
-  padding: 20px;
-  background: rgba(50, 50, 50, 0.8); /* Dark glass effect */
-  backdrop-filter: blur(12px); /* Increased blur */
-  border-radius: 12px; /* Rounded corners */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4); /* Enhanced shadow */
-}
-
-.add-member-form h2 {
-  margin-bottom: 15px;
-  color: #f5f5f5; /* Light color for header */
-  font-size: 1.8em; /* Larger font size for title */
-}
-
-.add-member-form input, .add-member-form select {
-  width: calc(100% - 24px); /* Adjusted width */
-  padding: 14px; /* Increased padding */
-  margin-bottom: 15px; /* Increased margin */
-  border: 1px solid #555; /* Slightly lighter border */
-  border-radius: 8px; /* Rounded corners */
-  background: #444; /* Darker background for inputs */
-  color: #f5f5f5; /* Light text color */
-  font-size: 1em; /* Adjusted font size */
-  transition: background 0.3s;
-}
-
-.add-member-form input:focus, .add-member-form select:focus {
-  background: #555; /* Lighter on focus */
-  outline: none;
-}
-
-.add-member-form button {
-  padding: 14px 24px; /* Larger padding */
-  border: none;
-  border-radius: 8px; /* Rounded corners */
-  background: #007bff;
-  color: #fff;
-  font-size: 1.2em; /* Larger font size */
-  cursor: pointer;
-  transition: background 0.3s, transform 0.3s;
-}
-
-.add-member-form button:hover {
-  background: #0056b3;
-  transform: scale(1.05); /* Slightly scale up on hover */
 }
