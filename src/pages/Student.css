@@ -31,6 +31,14 @@
 
 .project-overview {
   width: 100%;
+  margin-bottom: 20px;
+}
+
+.project-overview h2 {
+  font-size: 30px; /* Increase the font size */
+  font-weight: bold; /* Make the text bold */
+  margin-bottom: 20px; /* Add some space below the title */
+  color: #b82121; /* You can adjust the color if needed */
 }
 
 .search-bar {
@@ -61,10 +69,10 @@
 
 .project-card-content {
   display: flex;
-  flex-direction: row; /* Align image and button horizontally */
-  align-items: center; /* Center items vertically */
-  gap: 20px; /* Space between the image and button */
-  width: 100%; /* Ensure it fills the width of project-card */
+  flex-direction: row; 
+  align-items: center; 
+  gap: 20px; 
+  width: 100%; 
 }
 
 .project-card h3 {
@@ -102,4 +110,31 @@
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
+}
+
+/* Student.css */
+
+/* Ensures that the container of the search bar centers its content */
+.project-overview {
+  text-align: center; 
+  margin-bottom: 20px;
+}
+
+/* Styles the search bar */
+.search-bar {
+  width: 50%; 
+  max-width: 400px; 
+  padding: 10px 15px; 
+  margin-top: 15px; 
+  border: 1px solid #ccc;
+  border-radius: 5px; 
+  font-size: 16px; 
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Adds responsiveness to the search bar */
+@media (max-width: 768px) {
+  .search-bar {
+    width: 80%; 
+  }
 }
