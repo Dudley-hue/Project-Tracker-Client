@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom'; // Import useParams to get classId from the URL
 import { authFetch } from '../components/authFetch';
 import './Projects.css'; // Ensure this CSS file is created and used
 
 function Projects() {
   const [projects, setProjects] = useState([]);
   const [error, setError] = useState('');
+  const { classId } = useParams(); // Get classId from the URL
 
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const data = await authFetch('http://127.0.0.1:5000/api/projects');
+        const data = await authFetch(`http://127.0.0.1:5000/api/classes/${classId}/projects`); // Fetch projects by classId
         setProjects(data);
       } catch (error) {
         setError(error.message);
@@ -17,11 +19,11 @@ function Projects() {
     };
 
     fetchProjects();
-  }, []);
+  }, [classId]); // Add classId as a dependency
 
   return (
     <div className="projects-container">
-      <h1 className="projects-title">Projects</h1>
+      <h1 className="projects-title">Projects in Class {classId}</h1> {/* Display the classId */}
       {error && <p className="error">{error}</p>}
       <div className="project-list">
         {projects.map((project) => (
