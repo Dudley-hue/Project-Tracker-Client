@@ -2,7 +2,7 @@ html, body, #root {
   height: 100%;
   margin: 0;
   background-color: #111;
-  background-image: url('./images/abstract-flow-background.jpg');
+  background-image: url('https://i.pinimg.com/236x/62/ba/fc/62bafc957ffca28de595b0f2c6dfd9a9.jpg');
   background-size: cover; /* Ensures the image covers the entire background */
   background-position: center;
   background-repeat: no-repeat;

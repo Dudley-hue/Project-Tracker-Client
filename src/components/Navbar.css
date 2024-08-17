@@ -1,7 +1,7 @@
 /* Navbar.css */
 
 .navbar {
-  background: linear-gradient(90deg, #6a11cb, #ff007f); /* Purple to pink gradient */
+  background: linear-gradient(90deg, #08070a, #a75d18); /* Purple to pink gradient */
   padding: 10px; /* Increased padding for more spacing */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Slightly larger shadow for depth */
   position: fixed;

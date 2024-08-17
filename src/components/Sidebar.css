@@ -22,7 +22,7 @@
 }
 
 .sidebar nav ul li a {
-  color: #0e131b;
+  color: #e7e9ee;
   text-decoration: none;
   display: flex;
   align-items: center;
@@ -33,7 +33,7 @@
 }
 
 .sidebar nav ul li a:hover {
-  background-color: #2f5b70; /* Dark blue color on hover */
+  background-color: #000000e1; /* Dark blue color on hover */
 }
 
 .sidebar nav ul li a i {
