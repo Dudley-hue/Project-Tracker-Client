@@ -55,7 +55,7 @@ body {
 .submit-btn {
   width: 100%;
   padding: 12px; /* Increased padding for a taller button */
-  background-color: rgba(0, 123, 255, 0.8); /* Semi-transparent button background */
+  background-color: #a75d18; /* Semi-transparent button background */
   color: #fff; /* White text color */
   border: none;
   border-radius: 10px; /* Rounded corners */
@@ -65,7 +65,7 @@ body {
 }
 
 .submit-btn:hover {
-  background-color: rgba(0, 123, 255, 1); /* Fully opaque background on hover */
+  background-color: #a75d18; /* Fully opaque background on hover */
 }
 
 /* Error message styling */
@@ -81,5 +81,5 @@ body {
 }
 
 .login-container p a:hover {
-  color: #007bff; /* Change color on hover */
+  color: #a75d18; /* Change color on hover */
 }

@@ -1,4 +1,4 @@
-/* Container for the entire student section */
+/* General Styles */
 .student-container {
   display: flex;
   flex-direction: column;
@@ -8,7 +8,7 @@
 }
 
 .add-project-section {
-  margin-bottom: 20px;
+  margin-bottom: 0px;
   margin-top: 40px;
   width: 100%;
   display: flex;
@@ -17,9 +17,20 @@
 }
 
 .toggle-add-form-btn {
-  padding: 10px 20px;
-  font-size: 16px;
+  background-color: #ff6600; /* Background color set to #ff6600 */
+  color: white; /* Text color set to white */
+  border: none;
+  padding: 20px 20px; /* Increased padding for a larger button */
+  font-size: 16px; /* Increased font size */
+  border-radius: 10px; /* Slightly rounded corners */
   cursor: pointer;
+  margin-bottom: 20px; /* Added margin at the bottom */
+  display: block;
+  width: fit-content;
+}
+
+.toggle-add-form-btn:hover {
+  background-color: #e65c00; /* Slightly darker shade on hover */
 }
 
 .project-form {
@@ -35,27 +46,36 @@
   margin-bottom: 20px;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Center the content horizontally */
+  align-items: center;
 }
 
-/* Center the search bar within its container */
+.project-overview h2 {
+  margin-top: 40px; /* Adjust this value to move the title downwards */
+  text-align: center; /* Optional: center the title */
+}
+
 .search-bar {
-  width: 50%; /* Adjust the width as needed */
+  width: 50%;
   max-width: 400px;
   padding: 10px 15px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 15px;
   font-size: 16px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-  text-align: center; /* Ensure the text inside the input is centered */
-  margin: 0 auto; /* Center the search bar itself */
+  text-align: center;
+  margin: 0 auto;
+  background-color: #ff6600;
+  color: white;
+}
+
+.search-bar::placeholder {
+  color: white; /* Placeholder color */
 }
 
 .project-list {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
-  justify-content: center; /* Center the project list */
+  justify-content: center;
 }
 
 .project-card {
@@ -93,6 +113,7 @@
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
+  background-color:#ff6600;
 }
 
 .update-form {
@@ -115,8 +136,77 @@
   cursor: pointer;
 }
 
+.github-btn {
+  background-color: #ff6600;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.github-btn:hover {
+  background-color: #e66f00;
+}
+
+/* Media Queries */
 @media (max-width: 768px) {
+  .project-card {
+    width: calc(45% - 20px);
+  }
+
   .search-bar {
-    width: 80%; /* Adjust the width of the search bar for smaller screens */
+    width: 80%;
+    color: #ccc;
+  }
+
+  .project-card-content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .project-thumbnail {
+    width: 100px;
+    height: 100px;
+  }
+
+  .toggle-add-form-btn {
+    width: 100%;
+    padding: 15px;
+    font-size: 14px;
+  }
+
+  .edit-project-btn, .update-form-btn, .github-btn {
+    padding: 10px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .project-card {
+    width: 100%;
+  }
+
+  .project-thumbnail {
+    width: 80px;
+    height: 80px;
+  }
+
+  .github-btn {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+
+  .toggle-add-form-btn, .edit-project-btn, .update-form-btn {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+
+  .search-bar {
+    width: 90%;
   }
 }

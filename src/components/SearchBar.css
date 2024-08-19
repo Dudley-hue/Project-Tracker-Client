@@ -9,29 +9,24 @@
   max-width: 500px; /* Limit the maximum width */
   padding: 12px 20px;
   border-radius: 30px; /* Rounded corners for a sleek look */
-  border: 1px solid #444; /* Darker border for better contrast */
+  border: none; /* Remove any border */
   background-color: #333; /* Dark background for a modern look */
   color: #fff; /* White text for readability */
   font-size: 16px; /* Increase font size for better legibility */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  box-shadow: none; /* Remove any box shadow */
   transition: all 0.3s ease; /* Smooth transition effects */
 }
 
 .search-bar input::placeholder {
-  color: #bbb; /* Light placeholder color */
+  color: #a16363; /* Light placeholder color */
   font-style: italic; /* Italicized placeholder text */
 }
 
 .search-bar input:focus {
   outline: none; /* Remove default focus outline */
-  border-color: #0066ff; /* Change border color on focus */
-  box-shadow: 0 4px 10px rgba(0, 102, 255, 0.3); /* Enhanced shadow on focus */
+  border-color: none; /* No border color change on focus */
+  box-shadow: none; /* No shadow on focus */
   background-color: #222; /* Slightly darker background on focus */
-}
-
-.search-bar input:hover {
-  border-color: blue; /* Change border color on hover */
-  background-color: orange; /* Slightly change background on hover */
 }
 
 @media (max-width: 600px) {

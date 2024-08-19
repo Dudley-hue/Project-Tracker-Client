@@ -56,7 +56,7 @@ body {
 .submit-btn {
   width: 100%;
   padding: 12px; /* Increased padding for a taller button */
-  background-color: rgba(40, 167, 69, 0.8); /* Semi-transparent button background */
+  background-color:#a75d18; /* Semi-transparent button background */
   color: #fff; /* White text color */
   border: none;
   border-radius: 10px; /* Rounded corners */
@@ -66,7 +66,7 @@ body {
 }
 
 .submit-btn:hover {
-  background-color: rgba(40, 167, 69, 1); /* Fully opaque background on hover */
+  background-color:  #ff4f4f; /* Fully opaque background on hover */
 }
 
 /* Error message styling */

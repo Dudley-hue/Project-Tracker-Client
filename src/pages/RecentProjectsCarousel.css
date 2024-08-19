@@ -42,7 +42,7 @@
     font-size: 2rem; /* Increase font size for the title */
     margin: 0 0 10px 0;
     font-weight: bold;
-    color: #ffcc00;
+    color:  #a75d18;
 }
 
 .carousel-caption p {
@@ -57,14 +57,14 @@
     padding: 12px 24px;
     font-weight: bold;
     color: #ffffff;
-    background-color: #007bff;
+    background-color:  #a75d18;
     border-radius: 5px;
     text-decoration: none;
     transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .github-link:hover {
-    background-color: #0056b3;
+    background-color: #d32f2f;
     transform: scale(1.05);
 }
 

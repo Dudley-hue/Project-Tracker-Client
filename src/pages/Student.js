@@ -129,59 +129,6 @@ function Student() {
 
   return (
     <div className="student-container">
-      <div className="add-project-section">
-        <button onClick={() => setShowAddForm(!showAddForm)} className="toggle-add-form-btn">
-          {showAddForm ? 'Cancel' : 'Add New Project'}
-        </button>
-        {showAddForm && (
-          <form onSubmit={handleAddProject} className="project-form">
-            <input
-              type="text"
-              placeholder="Project Name"
-              value={newProject.name}
-              onChange={(e) => setNewProject({ ...newProject, name: e.target.value })}
-              className="input-field"
-            />
-            <input
-              type="text"
-              placeholder="Description"
-              value={newProject.description}
-              onChange={(e) => setNewProject({ ...newProject, description: e.target.value })}
-              className="input-field"
-            />
-            <input
-              type="text"
-              placeholder="Owner ID"
-              value={newProject.owner_id}
-              onChange={(e) => setNewProject({ ...newProject, owner_id: e.target.value })}
-              className="input-field"
-            />
-            <input
-              type="text"
-              placeholder="GitHub Link"
-              value={newProject.github_link}
-              onChange={(e) => setNewProject({ ...newProject, github_link: e.target.value })}
-              className="input-field"
-            />
-            <input
-              type="text"
-              placeholder="Class ID"
-              value={newProject.class_id}
-              onChange={(e) => setNewProject({ ...newProject, class_id: e.target.value })}
-              className="input-field"
-            />
-            <input
-              type="text"
-              placeholder="Poster URL"
-              value={newProject.poster_url}
-              onChange={(e) => setNewProject({ ...newProject, poster_url: e.target.value })}
-              className="input-field"
-            />
-            <button type="submit" className="submit-form-btn">Add Project</button>
-          </form>
-        )}
-      </div>
-
       <div className="project-overview">
         <h2>Your Projects</h2>
         <input
@@ -192,12 +139,19 @@ function Student() {
           className="search-bar"
         />
         <div className="project-list">
-          {filteredProjects.map((project) => (
+          {filteredProjects.slice(0, 9).map((project) => (
             <div key={project.id} className="project-card">
               <h3>{project.name}</h3>
               <p>{project.description}</p>
               <p>Owner ID: {project.owner_id}</p>
-              <p>GitHub Link: <a href={project.github_link} target="_blank" rel="noopener noreferrer">{project.github_link}</a></p>
+              <p>
+                <button 
+                  onClick={() => window.open(project.github_link, "_blank")}
+                  className="github-btn"
+                >
+                  View on GitHub
+                </button>
+              </p>
               <p>Class ID: {project.class_id}</p>
               <img src={project.poster_url} alt={project.name} className="project-thumbnail" />
               <button onClick={() => handleSelectProject(project)} className="edit-project-btn">Edit</button>
@@ -251,6 +205,59 @@ function Student() {
             </div>
           ))}
         </div>
+      </div>
+
+      <div className="add-project-section">
+        {showAddForm && (
+          <form onSubmit={handleAddProject} className="project-form">
+            <input
+              type="text"
+              placeholder="Project Name"
+              value={newProject.name}
+              onChange={(e) => setNewProject({ ...newProject, name: e.target.value })}
+              className="input-field"
+            />
+            <input
+              type="text"
+              placeholder="Description"
+              value={newProject.description}
+              onChange={(e) => setNewProject({ ...newProject, description: e.target.value })}
+              className="input-field"
+            />
+            <input
+              type="text"
+              placeholder="Owner ID"
+              value={newProject.owner_id}
+              onChange={(e) => setNewProject({ ...newProject, owner_id: e.target.value })}
+              className="input-field"
+            />
+            <input
+              type="text"
+              placeholder="GitHub Link"
+              value={newProject.github_link}
+              onChange={(e) => setNewProject({ ...newProject, github_link: e.target.value })}
+              className="input-field"
+            />
+            <input
+              type="text"
+              placeholder="Class ID"
+              value={newProject.class_id}
+              onChange={(e) => setNewProject({ ...newProject, class_id: e.target.value })}
+              className="input-field"
+            />
+            <input
+              type="text"
+              placeholder="Poster URL"
+              value={newProject.poster_url}
+              onChange={(e) => setNewProject({ ...newProject, poster_url: e.target.value })}
+              className="input-field"
+            />
+            <button type="submit" className="submit-form-btn">Add Project</button>
+          </form>
+        )}
+        <button onClick={() => setShowAddForm(!showAddForm)} className="toggle-add-form-btn">
+          {showAddForm ? 'Cancel' : 'Add New Project'}
+        </button>
       </div>
     </div>
   );
