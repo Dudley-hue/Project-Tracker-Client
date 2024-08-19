@@ -37,7 +37,7 @@ const Navbar = ({ isAuthenticated, onLogout }) => {
         <li><Link to="/contact">Contact</Link></li>
         {isAuthenticated ? (
           <>
-            <li><Link to="/admin">Admin</Link></li>
+            {/* <li><Link to="/admin">Admin</Link></li> */}
             <li><Link to="/recent-projects">Recent Projects</Link></li>
             <li><button onClick={handleLogout}>Logout</button></li>
           </>

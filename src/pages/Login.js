@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import './Login.css'
-function Login() {
+import './Login.css';
+
+function Login({ onLogin }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -21,6 +22,7 @@ function Login() {
 
       if (response.ok) {
         localStorage.setItem('token', data.token); // Store the token
+        onLogin(data.is_admin); // Notify App.js of the successful login
         if (data.is_admin) {
           navigate('/admin'); // Redirect to the admin page if the user is an admin
         } else {

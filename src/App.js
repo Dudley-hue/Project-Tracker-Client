@@ -35,18 +35,23 @@ function App() {
     const checkAuthStatus = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await fetch('https://project-tracker-server-sor4.onrender.com/api/check_admin', {
-          method: 'GET',
-          headers: {
-            'Authorization': `Bearer ${token}`
+        if (token) {
+          const response = await fetch('https://project-tracker-server-sor4.onrender.com/api/check_admin', {
+            method: 'GET',
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
+          });
+
+          const data = await response.json();
+
+          if (response.ok) {
+            setIsAuthenticated(true);
+            setIsAdmin(data.is_admin);
+          } else {
+            setIsAuthenticated(false);
+            setIsAdmin(false);
           }
-        });
-
-        const data = await response.json();
-
-        if (response.ok) {
-          setIsAuthenticated(true);
-          setIsAdmin(data.is_admin);
         } else {
           setIsAuthenticated(false);
           setIsAdmin(false);
@@ -61,6 +66,11 @@ function App() {
 
     checkAuthStatus();
   }, []);
+
+  const handleLogin = (isAdmin) => {
+    setIsAuthenticated(true);
+    setIsAdmin(isAdmin);
+  };
 
   const handleLogout = () => {
     localStorage.removeItem('token'); // Remove token from local storage
@@ -86,7 +96,7 @@ function App() {
             <Route path="/admin" element={<AdminRoute isAdmin={isAdmin}><Admin /></AdminRoute>} />
             <Route path="/student" element={<ProtectedRoute isAuthenticated={isAuthenticated}><Student /></ProtectedRoute>} />
             <Route path="/recent-projects" element={<RecentProjectsCarousel />} /> {/* New Route */}
-            <Route path="/login" element={isAuthenticated ? <Navigate to={isAdmin ? "/admin" : "/"} /> : <Login />} />
+            <Route path="/login" element={<Login onLogin={handleLogin} />} />
             <Route path="/register" element={isAuthenticated ? <Navigate to={isAdmin ? "/admin" : "/"} /> : <Register />} />
             <Route path="/logout" element={<Logout />} />
             <Route path="/contact" element={<Contact />} />
