@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Cohorts.css';
 import { authFetch } from '../components/authFetch';
+import SearchBar from '../components/SearchBar'; // Import the SearchBar component
 
 const Cohorts = () => {
   const [cohorts, setCohorts] = useState([]);
@@ -29,13 +30,8 @@ const Cohorts = () => {
   return (
     <div className="cohorts">
       <h2>Cohorts</h2>
-      <input
-        type="text"
-        placeholder="Search cohorts"
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        className="search-bar"
-      />
+      {/* Replace the inline search input with the SearchBar component */}
+      <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       <div className="project-list">
         {filteredCohorts.map(cohort => (
           <div key={cohort.id} className="cohort-card">

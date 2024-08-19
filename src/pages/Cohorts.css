@@ -79,7 +79,7 @@ h2 {
 .cohort-card-title {
   font-size: 1.4em; /* Slightly larger font size for better prominence */
   margin: 0;
-  color: rgb(43, 226, 180); /* Bright color for title */
+  color: #ff6600; /* Bright color for title */
   font-weight: bold; /* Make the title bold */
 }
 

@@ -1,13 +1,41 @@
 .search-bar {
-    margin-bottom: 20px;
-  }
-  
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.search-bar input {
+  width: 80%; /* Adjust width for better alignment */
+  max-width: 500px; /* Limit the maximum width */
+  padding: 12px 20px;
+  border-radius: 30px; /* Rounded corners for a sleek look */
+  border: 1px solid #444; /* Darker border for better contrast */
+  background-color: #333; /* Dark background for a modern look */
+  color: #fff; /* White text for readability */
+  font-size: 16px; /* Increase font size for better legibility */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  transition: all 0.3s ease; /* Smooth transition effects */
+}
+
+.search-bar input::placeholder {
+  color: #bbb; /* Light placeholder color */
+  font-style: italic; /* Italicized placeholder text */
+}
+
+.search-bar input:focus {
+  outline: none; /* Remove default focus outline */
+  border-color: #0066ff; /* Change border color on focus */
+  box-shadow: 0 4px 10px rgba(0, 102, 255, 0.3); /* Enhanced shadow on focus */
+  background-color: #222; /* Slightly darker background on focus */
+}
+
+.search-bar input:hover {
+  border-color: blue; /* Change border color on hover */
+  background-color: orange; /* Slightly change background on hover */
+}
+
+@media (max-width: 600px) {
   .search-bar input {
-    width: 100%;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    background-color: #222;
-    color: #fff;
+    width: 90%; /* Adjust width for smaller screens */
   }
-  
+}

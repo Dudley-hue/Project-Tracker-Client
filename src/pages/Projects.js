@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom'; // Import useParams to get classId from the URL
 import { authFetch } from '../components/authFetch';
 import './Projects.css'; // Ensure this CSS file is created and used
+import SearchBar from '../components/SearchBar'; // Import the SearchBar component
 
 function Projects() {
   const [projects, setProjects] = useState([]);
   const [error, setError] = useState('');
+  const [searchTerm, setSearchTerm] = useState(''); // Add state for search term
   const { classId } = useParams(); // Get classId from the URL
 
   useEffect(() => {
@@ -21,12 +23,19 @@ function Projects() {
     fetchProjects();
   }, [classId]); // Add classId as a dependency
 
+  // Filter projects based on the search term
+  const filteredProjects = projects.filter(project =>
+    project.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div className="projects-container">
       <h1 className="projects-title">Projects in Class {classId}</h1> {/* Display the classId */}
       {error && <p className="error">{error}</p>}
+      {/* Include the SearchBar component */}
+      <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       <div className="project-list">
-        {projects.map((project) => (
+        {filteredProjects.map((project) => (
           <div key={project.id} className="project-card">
             {project.poster_url && (
               <img

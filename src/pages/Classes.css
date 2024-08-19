@@ -71,7 +71,7 @@ h2 {
 .class-card-title {
   font-size: 1.2em;
   margin: 0;
-  color: #00FFFF; /* Brighter color for class name */
+  color: #ff6600; /* Brighter color for class name */
   font-weight: bold; /* Make class name bold */
 }
 
