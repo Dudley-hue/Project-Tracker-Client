@@ -11,7 +11,7 @@ function Projects() {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const data = await authFetch(`http://127.0.0.1:5000/api/classes/${classId}/projects`); // Fetch projects by classId
+        const data = await authFetch(`https://project-tracker-server-sor4.onrender.com/api/classes/${classId}/projects`); // Fetch projects by classId
         setProjects(data);
       } catch (error) {
         setError(error.message);

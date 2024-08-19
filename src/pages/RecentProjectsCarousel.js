@@ -14,7 +14,7 @@ function RecentProjectsCarousel() {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const data = await authFetch('http://127.0.0.1:5000/api/projects');
+        const data = await authFetch('https://project-tracker-server-sor4.onrender.com/api/projects');
         const limitedData = data.slice(0, 20); // Limit the data to 20 items
         setProjects(limitedData);
         setFilteredProjects(limitedData); // Initialize filteredProjects with limited projects

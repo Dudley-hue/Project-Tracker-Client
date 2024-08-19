@@ -35,7 +35,7 @@ function App() {
     const checkAuthStatus = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await fetch('http://127.0.0.1:5000/api/check_admin', {
+        const response = await fetch('https://project-tracker-server-sor4.onrender.com/api/check_admin', {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`

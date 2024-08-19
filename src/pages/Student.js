@@ -27,7 +27,7 @@ function Student() {
     const fetchProjects = async () => {
       const token = localStorage.getItem('token');
       try {
-        const response = await fetch('http://127.0.0.1:5000/api/projects', {
+        const response = await fetch('https://project-tracker-server-sor4.onrender.com/api/projects', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -49,7 +49,7 @@ function Student() {
     e.preventDefault();
     const token = localStorage.getItem('token');
     try {
-      const response = await fetch('http://127.0.0.1:5000/api/projects', {
+      const response = await fetch('https://project-tracker-server-sor4.onrender.com/api/projects', {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -93,7 +93,7 @@ function Student() {
     const token = localStorage.getItem('token');
     if (selectedProject) {
       try {
-        const response = await fetch(`http://127.0.0.1:5000/api/projects/${selectedProject.id}`, {
+        const response = await fetch(`https://project-tracker-server-sor4.onrender.com/api/projects/${selectedProject.id}`, {
           method: 'PUT',
           headers: {
             Authorization: `Bearer ${token}`,

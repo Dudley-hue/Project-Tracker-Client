@@ -11,7 +11,7 @@ const Cohorts = () => {
   useEffect(() => {
     const fetchCohorts = async () => {
       try {
-        const data = await authFetch('http://127.0.0.1:5000/api/cohorts');
+        const data = await authFetch('https://project-tracker-server-sor4.onrender.com/api/cohorts');
         setCohorts(data);
       } catch (error) {
         console.error('Error fetching cohorts:', error);

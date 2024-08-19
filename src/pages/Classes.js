@@ -13,7 +13,7 @@ const Classes = () => {
   useEffect(() => {
     const fetchClasses = async () => {
       try {
-        const data = await authFetch(`http://127.0.0.1:5000/api/classes?cohort_id=${cohortId}`);
+        const data = await authFetch(`https://project-tracker-server-sor4.onrender.com/api/classes?cohort_id=${cohortId}`);
         setClasses(data);
       } catch (error) {
         setError('Failed to fetch classes.');
