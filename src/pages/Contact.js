@@ -1,6 +1,6 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
-import './Home.css'; // Reuse the existing CSS for styling
+import './Home.css';
 
 const Contact = () => (
   <div className="home">
@@ -8,8 +8,14 @@ const Contact = () => (
     <div className="content">
       <div className="contact-info">
         <h2>Contact Us</h2>
-        <p>Phone number: +380 73 103 07 25</p>
-        <p>Email: info@artedante.com</p>
+        <p>Phone number: +254743061477</p>
+        <p>Email: langatjoel42@gmail</p>
+        <a
+          href="mailto:langatjoel42@gmail.com?subject=Inquiry&body=Hello,%20I%20would%20like%20to%20know%20more%20about%20your%20services."
+          className="email-link"
+        >
+          Send an Email
+        </a>
       </div>
     </div>
   </div>

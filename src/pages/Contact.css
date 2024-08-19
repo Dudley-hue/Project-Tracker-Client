@@ -1,0 +1,48 @@
+.contact {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background: url('https://i.pinimg.com/564x/44/c0/b3/44c0b32bb7b3f3fc981d7423b084aa3a.jpg') no-repeat center center fixed;
+    background-size: cover;
+  }
+  
+  .content {
+    display: flex;
+    justify-content: center; /* Center the card horizontally */
+    align-items: center; /* Center the card vertically */
+    height: 100%; /* Ensure the content takes full height */
+    background: rgba(87, 76, 76, 0.5); /* Dark overlay to enhance readability */
+  }
+  
+  .contact-info {
+    background: rgba(255, 255, 255, 0.2); /* Glassy background effect */
+    backdrop-filter: blur(10px); /* Apply blur for glass effect */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); /* Softer shadow */
+    color: #1a1818; /* Dark text color */
+    width: 800px; /* Adjust width for the content */
+    text-align: left; /* Align text to the left */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effects */
+  }
+  
+  .contact-info:hover {
+    transform: scale(1.05); /* Slightly enlarge the section on hover */
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8); /* Brighten shadow on hover */
+  }
+  
+  .contact-info h2 {
+    margin-top: 0;
+    margin-bottom: 15px; /* Space below the title */
+    font-size: 1.5rem; /* Larger title font */
+    color: rgb(168, 35, 35);
+    font-size: 30px;
+  }
+  
+  .contact-info p {
+    margin: 10px 0;
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: #242323; /* Light grey color for text */
+  }
+  
